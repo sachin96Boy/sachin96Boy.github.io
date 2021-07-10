@@ -1,13 +1,10 @@
-import NavBarVertical from "./NavBar/NavBar-Vertical";
-
-
 import "./App.css";
-import SideHeader from "./side-header/Side-header";
+import NavBar from "./NavBar/NavBar";
+
 
 function App() {
   return(
-     <NavBarVertical />,
-     <SideHeader />
+    <NavBar />
      
      );
 }
