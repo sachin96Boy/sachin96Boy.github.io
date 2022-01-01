@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@craco/craco": "^6.1.2",
+    "@craco/craco": "^6.2.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -40,6 +40,18 @@
     "autoprefixer": "^9.8.6",
     "postcss": "^7.0.36",
     "stylelint-config-recommended": "^5.0.0",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.4"
-  }
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.7"
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "craco.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sachin96Boy/sachin96Boy.github.io.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sachin96Boy/sachin96Boy.github.io/issues"
+  },
+  "homepage": "https://github.com/sachin96Boy/sachin96Boy.github.io#readme"
 }
