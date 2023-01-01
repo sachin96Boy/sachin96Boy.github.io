@@ -1,7 +1,17 @@
+import Sidebar from "./components/sidebar/Sidebar";
+
 function App() {
   return (
     <div className="App">
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
+      <div>
+        <Sidebar />
+      </div>
+      <div>
+        <h1>main</h1>
+      </div>
+      <div>
+        <h1>sidebar-right</h1>
+      </div>
     </div>
   );
 }
