@@ -1,3 +1,4 @@
+import VerticleHeader from "./components/header/VerticleHeader";
 import Sidebar from "./components/sidebar/Sidebar";
 
 function App() {
@@ -10,7 +11,7 @@ function App() {
         <h1>main</h1>
       </div>
       <div className="right-0">
-        <h1>sidebar-right</h1>
+        <VerticleHeader />
       </div>
     </div>
   );
