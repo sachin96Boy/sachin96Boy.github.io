@@ -2,14 +2,14 @@ import Sidebar from "./components/sidebar/Sidebar";
 
 function App() {
   return (
-    <div className="App">
+    <div className="flex">
       <div>
         <Sidebar />
       </div>
-      <div>
+      <div className="flex-1">
         <h1>main</h1>
       </div>
-      <div>
+      <div className="right-0">
         <h1>sidebar-right</h1>
       </div>
     </div>
