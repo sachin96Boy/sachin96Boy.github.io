@@ -68,9 +68,14 @@ function SachinBoy() {
       },
     })
       .then(() => {
+        renderer.setAnimationLoop(() => {
+            controls.update();
+            renderer.render(scene, camera);
+        });
         renderer.render(scene, camera);
         setLoading(false);
         renderer.dispose();
+        controls.dispose();
       })
       .catch((err) => {
         console.log(err);
