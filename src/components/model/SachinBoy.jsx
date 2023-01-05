@@ -10,7 +10,7 @@ function SachinBoy() {
   const [camera, setCamera] = React.useState(null);
   const [controls, setControls] = React.useState(null);
   const [target] = React.useState(new THREE.Vector3(0, 0, 0));
-  const [initialCameraPosition] = React.useState(new THREE.Vector3(0, 0, 5));
+  const [initialCameraPosition] = React.useState(new THREE.Vector3(0, 0, 3));
   const [scene] = React.useState(new THREE.Scene());
 
   const handleWindowResize = useCallback(() => {
@@ -50,11 +50,8 @@ function SachinBoy() {
     setCamera(camera);
     setControls(controls);
 
-    const light = new THREE.AmbientLight(0xffffff, 0.5);
+    const light = new THREE.AmbientLight(0xffffff, 0.7);
     scene.add(light);
-
-    const light2 = new THREE.DirectionalLight(0xffffff, 0.5);
-    scene.add(light2);
 
     Model({
       scene,
@@ -62,16 +59,12 @@ function SachinBoy() {
       options: {
         receiveShadow: true,
         castShadow: true,
-        scale: 1,
-        position: [0, 0, 0],
-        rotation: [0, 0, 0],
+        scale: 3,
+        position: [0, -4, 0.5],
+        rotation: [0, -0.4, 0],
       },
     })
       .then(() => {
-        renderer.setAnimationLoop(() => {
-            controls.update();
-            renderer.render(scene, camera);
-        });
         renderer.render(scene, camera);
         setLoading(false);
         renderer.dispose();
@@ -90,10 +83,10 @@ function SachinBoy() {
   }, [renderer, handleWindowResize]);
 
   return (
-    <div ref={refContainer} className="m-auto -mb-28 w-96 h-96 relative">
+    <div ref={refContainer} className="m-auto h-32 bg-gradient-to-r from-slate-400 to-slate-900 relative">
       <div className="absolute top-0 left-0 w-full h-full">
         {loading && (
-          <div className="absolute top-0 left-0 w-full h-full bg-gray-200 flex justify-center items-center">
+          <div className="absolute top-0 left-0 w-full h-full bg-gray-400 flex justify-center items-center">
             <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900">
               <div className="animate-ping rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900"></div>
             </div>

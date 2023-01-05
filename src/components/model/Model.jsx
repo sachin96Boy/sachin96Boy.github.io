@@ -4,13 +4,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 function Model({
     scene,
     glbpath,
-    options = {
-        receiveShadow: true,
-        castShadow: true,
-        scale: 1,
-        position: [0, 0, 0],
-        rotation: [0, 0, 0],
-    },
+    options,
 }) {
     const { receiveShadow, castShadow, scale, position, rotation } = options
   return new Promise((resolve, reject) => {

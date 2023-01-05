@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 
 function Sidebar() {
   return (
-    <div className="flex flex-col w-64 h-screen px-4 py-8 bg-slate-900 border-slate-700">
+    <div className="flex flex-col w-64 h-screen px-4 py-8 bg-slate-900 border-slate-700 border-r-4">
       {/* profile picture with an active button */}
       <div className="flex flex-col items-center justify-between">
         <div className="inline-flex relative">

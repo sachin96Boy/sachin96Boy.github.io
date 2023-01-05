@@ -1,3 +1,4 @@
+import BodyComponent from "./components/body-comp/BodyComponent";
 import VerticleHeader from "./components/header/VerticleHeader";
 import NoSSr from "./components/model/NoSSR";
 import SachinBoy from "./components/model/SachinBoy";
@@ -10,9 +11,10 @@ function App() {
         <Sidebar />
       </div>
       <div className="flex-1">
-        <NoSSr>
+        {/* <NoSSr> */}
           <SachinBoy />
-        </NoSSr>
+          <BodyComponent />
+        {/* </NoSSr> */}
       </div>
       <div className="right-0">
         <VerticleHeader />
