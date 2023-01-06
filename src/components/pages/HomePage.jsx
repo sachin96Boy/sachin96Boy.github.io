@@ -5,7 +5,7 @@ import BodyComponent from '../body-comp/BodyComponent'
 
 function HomePage() {
   return (
-    <div className='w-full'>
+    <div className='h-full'>
         <HeroSection />
         <BodyComponent />
     </div>
