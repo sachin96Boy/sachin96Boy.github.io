@@ -1,4 +1,3 @@
-import React from 'react'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 
 function Model({

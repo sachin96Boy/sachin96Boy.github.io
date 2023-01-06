@@ -10,10 +10,10 @@ function App() {
       <div>
         <Sidebar />
       </div>
-      <div className="flex-1">
+      <div className="flex-1 outline-offset-8">
         {/* <NoSSr> */}
-          <SachinBoy />
-          <BodyComponent />
+        <SachinBoy />
+        <BodyComponent />
         {/* </NoSSr> */}
       </div>
       <div className="right-0">
