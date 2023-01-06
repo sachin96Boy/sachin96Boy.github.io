@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import Model from "./model";
+import Model from "./Model";
 
 function SachinBoy() {
   const refContainer = React.useRef(null);
