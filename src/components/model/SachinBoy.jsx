@@ -73,7 +73,7 @@ function SachinBoy() {
 
     Model({
       scene,
-      glbpath: "../../3delems/sachin96Boy.glb",
+      glbpath: "/3delems/sachin96Boy.glb",
       options: {
         receiveShadow: true,
         castShadow: true,
