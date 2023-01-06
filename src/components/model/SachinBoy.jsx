@@ -10,9 +10,7 @@ function SachinBoy() {
   const [camera, setCamera] = React.useState(null);
   const [controls, setControls] = React.useState(null);
   const [target] = React.useState(new THREE.Vector3(0, 0, 0));
-  const [initialCameraPosition] = React.useState(
-    new THREE.Vector3(-0.6, 0.4, 3)
-  );
+  const [initialCameraPosition] = React.useState(new THREE.Vector3(0, 0, 3));
   const [scene] = React.useState(new THREE.Scene());
 
   const handleWindowResize = useCallback(() => {
@@ -29,7 +27,7 @@ function SachinBoy() {
 
   const handlemousemove = useCallback(
     (e) => {
-      if(camera === null) return;
+      if (camera === null) return;
       const mouse = new THREE.Vector2();
       mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
       mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
@@ -43,8 +41,6 @@ function SachinBoy() {
     },
     [camera, scene]
   );
-
-
 
   React.useEffect(() => {
     const width = refContainer.current.clientWidth;
@@ -82,7 +78,7 @@ function SachinBoy() {
         receiveShadow: true,
         castShadow: true,
         scale: 3,
-        position: [0, -4, 0],
+        position: [0.7, -4, 0],
         rotation: [0, -0.4, 0],
       },
     })
@@ -113,7 +109,7 @@ function SachinBoy() {
   return (
     <div
       ref={refContainer}
-      className="m-auto h-screen bg-gradient-to-r from-slate-400 to-slate-900 relative"
+      className="m-auto h-screen bg-gradient-to-r from-slate-400 to-slate-900 overflow-hidden"
     >
       <div className="absolute top-0 left-0 w-full h-full">
         {loading && (
