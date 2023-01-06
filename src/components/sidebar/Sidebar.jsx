@@ -6,7 +6,7 @@ import {
   BsLinkedin,
   BsTwitter,
 } from "react-icons/bs";
-import { Link } from "react-router-dom";
+
 
 function Sidebar() {
   return (
@@ -35,18 +35,18 @@ function Sidebar() {
       </div>
       {/* list of social media set */}
       <div className="flex flex-row justify-center mt-6">
-        <Link href="https://www.facebook.com/Sachin96boy">
+        <a  dir="https://www.facebook.com/Sachin96boy">
           <BsFacebook className="w-6 h-6 mr-3 text-slate-400 hover:text-slate-100" />
-        </Link>
-        <Link href="https://www.linkedin.com/in/sachin-supunthaka-9b5b3b1b3/">
+        </a>
+        <a href="https://www.linkedin.com/in/sachin-supunthaka-9b5b3b1b3/">
           <BsLinkedin className="w-6 h-6 mr-3 text-slate-400 hover:text-slate-100" />
-        </Link>
-        <Link href="https://www.twitter.com/SACHINSUPUNTHAK">
+        </a>
+        <a href="https://www.twitter.com/SACHINSUPUNTHAK">
           <BsTwitter className="w-6 h-6 mr-3 text-slate-400 hover:text-slate-100" />
-        </Link>
-        <Link href="https://www.github.com/Sachin96Boy">
+        </a>
+        <a href="https://www.github.com/Sachin96Boy">
           <BsGithub className="w-6 h-6 mr-3 text-slate-400 hover:text-slate-100" />
-        </Link>
+        </a>
       </div>
       {/* personal info section */}
       <div className="flex flex-col mt-10">
