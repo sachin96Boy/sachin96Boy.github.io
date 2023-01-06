@@ -10,11 +10,9 @@ function App() {
       <div>
         <Sidebar />
       </div>
-      <div className="flex-1 outline-offset-8">
-        {/* <NoSSr> */}
+      <div className="overflow-y-scroll flex-1">
         <SachinBoy />
         <BodyComponent />
-        {/* </NoSSr> */}
       </div>
       <div className="right-0">
         <VerticleHeader />
