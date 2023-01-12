@@ -78,7 +78,7 @@ function SachinBoy() {
         receiveShadow: true,
         castShadow: true,
         scale: 3,
-        position: [0.7, -4, 0],
+        position: [0, -4, 0],
         rotation: [0, -0.4, 0],
       },
     })
@@ -109,7 +109,7 @@ function SachinBoy() {
   return (
     <div
       ref={refContainer}
-      className="m-auto h-screen bg-gradient-to-r from-slate-400 to-slate-900 overflow-hidden"
+      className="m-auto h-screen overflow-hidden"
     >
       <div className="absolute top-0 left-0 w-full h-full">
         {loading && (

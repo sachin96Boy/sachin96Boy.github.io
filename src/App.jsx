@@ -11,12 +11,12 @@ function App() {
       <div className="fixed z-50">
         <Sidebar />
       </div>
-      <div className="flex-grow">
+      <div>
         <Routes>
           <Route path="/" element={<HomePage />} />
         </Routes>
       </div>
-      <div className="right-0 fixed z-50">
+      <div className="right-0 fixed  z-50">
         <VerticleHeader />
       </div>
     </div>

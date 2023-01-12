@@ -11,7 +11,7 @@ import { IconContext } from "react-icons";
 
 function VerticleHeader() {
   return (
-    <header className="flex flex-col h-screen px-4 bg-slate-900 border-slate-700 justify-center">
+    <header className="flex w-20 flex-col h-screen px-4 bg-slate-900 border-slate-700 justify-center">
       <nav>
         <ul className="flex flex-col items-center justify-center my-16  gap-8">
           <li>
