@@ -57,7 +57,7 @@ function MyServices() {
           I am also experienced in 3D Animation and 3D Modeling. I have worked
           on many 3D projects for small businesses and startups.
         </div>
-        <div className="grid grid-cols-3 gap-3 bg-slate-400 p-4 rounded-lg">
+        <div className="grid grid-cols-3 gap-3 bg-slate-400/50 p-4 rounded-lg backdrop-blur-sm">
           {services.map((service, index) => {
             return <ItemCard key={index} {...service} />;
           })}
