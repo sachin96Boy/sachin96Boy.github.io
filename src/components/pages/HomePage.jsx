@@ -2,6 +2,7 @@ import React from "react";
 import HeroSection from "../body-comp/HeroSection";
 import BodyComponent from "../body-comp/BodyComponent";
 import MyServices from "../body-comp/MyServices";
+import WorkExperiences from "../body-comp/WorkExperiences";
 
 function HomePage() {
   return (
@@ -9,6 +10,7 @@ function HomePage() {
       <div className="absolute  bg-gradient-to-r from-slate-500 to-slate-900">
         <HeroSection />
         <MyServices />
+        <WorkExperiences />
         <BodyComponent />
       </div>
     </div>
