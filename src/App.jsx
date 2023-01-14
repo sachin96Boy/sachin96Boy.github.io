@@ -10,7 +10,7 @@ import WorkHistory from "./components/pages/WorkHistory";
 function App() {
   return (
     <div className="flex h-screen">
-      <div className="fixed z-50">
+      <div className="fixed z-50 hidden md:block lg:block">
         <Sidebar />
       </div>
       <div>

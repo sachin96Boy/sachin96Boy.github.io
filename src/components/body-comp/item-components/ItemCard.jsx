@@ -9,10 +9,10 @@ function ItemCard(props) {
           {icon}
         </div>
         <div>
-          <h1 className="text-2xl font-bold text-center">{title}</h1>
+          <h1 className="text-md lg:text-2xl font-bold text-center hidden md:block lg:block">{title}</h1>
         </div>
         <div>
-          <p className="text-center text-slate-600">{description}</p>
+          <p className="text-center text-slate-600 hidden md:block lg:block ">{description}</p>
         </div>
       </div>
     </div>

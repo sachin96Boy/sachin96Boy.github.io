@@ -22,7 +22,7 @@ function WorkExperiences() {
   ];
   return (
     <div className="w-full h-full bg-service bg-cover rounded-sm">
-      <div className="flex items-center justify-center p-4">
+      <div className="flex flex-col lg:flex-row items-center justify-center p-4 gap-2">
         <div className="w-1/2 h-full  bg-opacity-50">
           <div className="flex flex-col items-center justify-center h-full">
             <h1 className="text-3xl font-bold text-slate-100">
