@@ -4,6 +4,8 @@ import VerticleHeader from "./components/header/VerticleHeader";
 import SachinBoy from "./components/model/SachinBoy";
 import Sidebar from "./components/sidebar/Sidebar";
 import HomePage from "./components/pages/HomePage";
+import Services from "./components/pages/Services";
+import WorkHistory from "./components/pages/WorkHistory";
 
 function App() {
   return (
@@ -11,12 +13,15 @@ function App() {
       <div className="fixed z-50">
         <Sidebar />
       </div>
-      <div className="flex-grow">
+      <div>
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/workhistory" element={<WorkHistory />} />
         </Routes>
       </div>
-      <div className="right-0 fixed z-50">
+      <div className="right-0 fixed  z-50">
         <VerticleHeader />
       </div>
     </div>
