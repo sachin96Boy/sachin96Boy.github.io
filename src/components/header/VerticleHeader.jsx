@@ -11,7 +11,7 @@ import { IconContext } from "react-icons";
 import { SiAngellist } from "react-icons/si";
 import { GiAngelOutfit } from "react-icons/gi";
 
-function VerticleHeader(props) {
+function VerticleHeader() {
   let [isOpenHeader, setIsOpenHeader] = React.useState(false);
 
   const toggleSidebar = () => {

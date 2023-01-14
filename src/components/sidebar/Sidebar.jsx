@@ -9,7 +9,7 @@ import {
 import { AiOutlineClose } from "react-icons/ai";
 import { RxHamburgerMenu } from "react-icons/rx";
 
-function Sidebar(props) {
+function Sidebar() {
   const [isOpen, setIsOpen] = React.useState(false);
 
   const toggleSidebar = () => {
@@ -118,23 +118,22 @@ function Sidebar(props) {
   if (isOpen) {
     content = (
       <>
-        <div className="flex flex-col w-screen md:w-64 lg:w-64 h-screen px-4 py-4 bg-slate-900 border-slate-700 border-r-4">
-          {/* hanburger Menu close button */}
-          <div className="relative ">
-            <div className="flex absolute justify-start rounded-full bg-slate-700 p-2 md:hidden lg:hidden">
-              <AiOutlineClose
-                className="w-8 h-8 text-white"
-                onClick={toggleSidebar}
-              />
-            </div>
+        {/* hanburger Menu close button */}
+        <div className="relative ">
+          <div className="flex m-4 absolute justify-start rounded-full bg-slate-700 p-2 md:hidden lg:hidden">
+            <AiOutlineClose
+              className="w-8 h-8 text-white"
+              onClick={toggleSidebar}
+            />
           </div>
-
+        </div>
+        <div className="flex flex-col w-screen md:w-64 lg:w-64 lg:h-screen px-4 py-4 bg-slate-900 border-slate-700 border-r-4">
           {/* profile picture with an active button */}
           <div className="flex flex-col items-center justify-between">
             <div className="inline-flex relative">
-              <div className="absolute bottom-2 right-5 p-2 bg-green-500 rounded-full border-2 border-white"></div>
+              <div className="absolute bottom-2 right-3 p-2 bg-green-500 rounded-full border-2 border-white"></div>
               <img
-                className="w-44 h-44 mx-auto rounded-full p-1 border-2 border-slate-700"
+                className="w-28 h-28 mx-auto rounded-full p-1 border-2 border-slate-700"
                 src="https://i.ibb.co/sVqvB3h/My-image.jpg"
                 alt="profile"
               />
@@ -152,7 +151,7 @@ function Sidebar(props) {
             </div>
           </div>
           {/* list of social media set */}
-          <div className="flex flex-row justify-center mt-6">
+          <div className="flex flex-row justify-center mt-3">
             <a dir="https://www.facebook.com/Sachin96boy">
               <BsFacebook className="w-6 h-6 mr-3 text-slate-400 hover:text-slate-100" />
             </a>
@@ -167,7 +166,7 @@ function Sidebar(props) {
             </a>
           </div>
           {/* personal info section */}
-          <div className="flex flex-col mt-10">
+          <div className="flex flex-col mt-5">
             <div className="flex flex-row items-center py-2 px-4 rounded-lg text-slate-100 bg-slate-800">
               <div className="flex flex-col">
                 <div className="text-md font-medium my-1">Education</div>
@@ -186,7 +185,7 @@ function Sidebar(props) {
           </div>
 
           {/* sidebar menu */}
-          <div className="flex flex-col mt-10">
+          <div className="flex flex-col mt-5">
             <div className="flex flex-row items-center py-2 px-4 rounded-lg text-slate-100 bg-slate-800">
               {/* language profiency ith progressBar */}
               <div className="flex flex-col">
@@ -203,7 +202,7 @@ function Sidebar(props) {
             </div>
           </div>
           {/* download cv button */}
-          <div className="flex flex-col mt-10">
+          <div className="flex flex-col mt-5">
             <div className="flex flex-col">
               <button className="bg-slate-800 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded border border-dotted border-white">
                 <div className="flex flex-row items-center justify-between">
