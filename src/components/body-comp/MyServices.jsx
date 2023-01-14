@@ -39,7 +39,7 @@ function MyServices() {
   ];
   return (
     <div className="w-full">
-      <div className="flex flex-col items-center justify-center p-4">
+      <div className="flex flex-col items-center justify-between p-4">
         <h1 className="text-4xl font-bold text-center text-slate-100 mb-6">
           My Services
         </h1>

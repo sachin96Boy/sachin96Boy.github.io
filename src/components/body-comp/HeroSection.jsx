@@ -4,7 +4,7 @@ import HeroText from "./hero-items/HeroText";
 
 function HeroSection() {
   return (
-    <div className="overflow-hidden h-[calc(90vh)]">
+    <div className="h-screen">
       <div className="flex">
         <HeroText />
         <div className="box-border w-full filter-none">

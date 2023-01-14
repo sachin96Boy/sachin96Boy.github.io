@@ -109,7 +109,7 @@ function SachinBoy() {
   return (
     <div
       ref={refContainer}
-      className="m-auto h-screen overflow-hidden"
+      className="m-auto h-screen"
     >
       <div className="absolute top-0 left-0 w-full h-full">
         {loading && (
