@@ -6,7 +6,7 @@ import WorkExperiences from "../body-comp/WorkExperiences";
 
 function HomePage() {
   return (
-    <div className="h-full left-64 w-[calc(100vw-21rem)] relative">
+    <div className="h-full md:left-64 lg:left-64 md:w-[calc(100vw-21rem)] lg:w-[calc(100vw-21rem)] relative">
       <div className="absolute  bg-gradient-to-r from-slate-500 to-slate-900">
         <HeroSection />
         <MyServices />
