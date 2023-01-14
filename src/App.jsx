@@ -9,8 +9,8 @@ import WorkHistory from "./components/pages/WorkHistory";
 
 function App() {
   return (
-    <div className="flex h-screen">
-      <div className="fixed z-50 hidden md:block lg:block">
+    <div className="flex flex-col md:flex-row lg:flex-row h-screen">
+      <div className="fixed z-50">
         <Sidebar />
       </div>
       <div>
