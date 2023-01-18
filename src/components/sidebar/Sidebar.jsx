@@ -24,7 +24,7 @@ function Sidebar() {
           onClick={toggleSidebar}
         />
       </div>
-      <div className="hidden md:flex lg:flex flex-col w-screen md:w-64 lg:w-64 h-screen px-4 py-8 bg-gray-900 border-gray-700 border-r-4">
+      <div className="hidden md:flex lg:flex flex-col w-screen md:w-64 lg:w-64  h-screen px-4 py-2 bg-gray-900 border-gray-700 border-r-4">
         {/* hanburger Menu close button */}
         <div className="flex justify-start md:hidden lg:hidden">
           <AiOutlineClose
@@ -71,7 +71,7 @@ function Sidebar() {
           </a>
         </div>
         {/* personal info section */}
-        <div className="flex flex-col mt-10">
+        <div className="flex flex-col mt-5">
           <div className="flex flex-row items-center py-2 px-4 rounded-lg text-gray-100 bg-gray-800">
             <div className="flex flex-col">
               <div className="text-md font-medium my-1">Education</div>
@@ -90,7 +90,7 @@ function Sidebar() {
         </div>
 
         {/* sidebar menu */}
-        <div className="flex flex-col mt-10">
+        <div className="flex flex-col mt-5">
           <div className="flex flex-row items-center py-2 px-4 rounded-lg text-gray-100 bg-gray-800">
             {/* language profiency ith progressBar */}
             <div className="flex flex-col">
@@ -101,7 +101,7 @@ function Sidebar() {
           </div>
         </div>
         {/* download cv button */}
-        <div className="flex flex-col mt-10">
+        <div className="flex flex-col mt-5">
           <div className="flex flex-col">
             <button className="bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded border border-dotted border-white">
               <div className="flex flex-row items-center justify-between">
