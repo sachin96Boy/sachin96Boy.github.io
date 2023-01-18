@@ -14,7 +14,7 @@ function HeroSection() {
       <div className="relative">
         <div className="absolute bottom-0 left-0 w-full overflow-hidden rotate-180">
           <svg
-            className="relative block w-[calc(100% + 1.3px)] h-28 fill-slate-600"
+            className="relative block w-[calc(100% + 1.3px)] h-28 fill-gray-600"
             data-name="Layer 1"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 1200 120"

@@ -8,11 +8,11 @@ import Footer from "../footer/Footer";
 function HomePage() {
   return (
     <div className="h-full md:left-64 lg:left-64 md:w-[calc(100vw-21rem)] lg:w-[calc(100vw-21rem)] relative">
-      <div className="absolute  bg-gradient-to-r from-slate-500 to-slate-900">
+      <div className="absolute  bg-gradient-to-r from-gray-500 to-gray-900">
         <HeroSection />
         <MyServices />
         <WorkExperiences />
-        <BodyComponent />
+        {/* <BodyComponent /> */}
         <Footer />
       </div>
     </div>
