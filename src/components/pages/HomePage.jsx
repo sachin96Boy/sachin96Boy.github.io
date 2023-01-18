@@ -3,6 +3,7 @@ import HeroSection from "../body-comp/HeroSection";
 import BodyComponent from "../body-comp/BodyComponent";
 import MyServices from "../body-comp/MyServices";
 import WorkExperiences from "../body-comp/WorkExperiences";
+import Footer from "../footer/Footer";
 
 function HomePage() {
   return (
@@ -12,6 +13,7 @@ function HomePage() {
         <MyServices />
         <WorkExperiences />
         <BodyComponent />
+        <Footer />
       </div>
     </div>
   );
