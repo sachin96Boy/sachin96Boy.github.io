@@ -1,5 +1,7 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+const withMT = require("@material-tailwind/react/utils/withMT");
+
+module.exports = withMT({
   mode: "jit",
   content: [
     "./index.html",
@@ -9,8 +11,9 @@ module.exports = {
     extend: {
       backgroundImage: {
         'service' : "url('/imageAssets/Night-sky-Image.jpg')",
+        'contactbg' : "url('/imageAssets/mybanner.png')",
       }
     },
   },
   plugins: [],
-}
+});
