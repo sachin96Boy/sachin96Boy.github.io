@@ -4,15 +4,15 @@ import HeroText from "./hero-items/HeroText";
 
 function HeroSection() {
   return (
-    <div className="h-full lg:h-screen">
+    <div className="h-full w-full lg:h-screen">
       <div className="flex flex-col lg:flex-row">
         <HeroText />
         <div className="box-border w-full filter-none overflow-hidden">
           <SachinBoy />
         </div>
       </div>
-      <div className="relative">
-        <div className="absolute bottom-0 left-0 w-full overflow-hidden rotate-180">
+      <div className="relative w-full">
+        <div className="absolute bottom-0 left-0 right-0 w-full rotate-180">
           <svg
             className="relative block w-[calc(100% + 1.3px)] h-28 fill-gray-600"
             data-name="Layer 1"

@@ -96,7 +96,7 @@ function VerticleHeader() {
           </div>
         </div>
         <header className="flex w-20 flex-col h-screen px-4 bg-gray-900 border-gray-700 justify-center">
-          <Navbar>
+          <nav>
             <ul className="flex flex-col items-center justify-center my-16  gap-8">
               <ul>
                 <Tooltip content="Material Tailwind">
@@ -142,7 +142,7 @@ function VerticleHeader() {
                 </Link>
               </li>
             </ul>
-          </Navbar>
+          </nav>
         </header>
       </>
     );

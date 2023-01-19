@@ -11,6 +11,7 @@ module.exports = withMT({
     extend: {
       backgroundImage: {
         'service' : "url('/imageAssets/Night-sky-Image.jpg')",
+        'contactbg' : "url('/imageAssets/mybanner.png')",
       }
     },
   },
