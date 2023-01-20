@@ -125,7 +125,7 @@ function Sidebar() {
             />
           </div>
         </div>
-        <div className="flex flex-col w-screen h-full md:w-64 lg:w-64 lg:h-screen px-4 py-4 bg-gray-900 border-gray-700 border-r-4">
+        <div className="flex flex-col w-screen h-screen md:w-64 lg:w-64 lg:h-screen px-4 py-4 bg-gray-900 border-gray-700 border-r-4">
           {/* profile picture with an active button */}
           <div className="flex flex-col items-center justify-between">
             <div className="inline-flex relative">
