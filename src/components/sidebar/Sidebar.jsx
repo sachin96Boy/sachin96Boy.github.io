@@ -57,7 +57,7 @@ function Sidebar() {
         </div>
         {/* list of social media set */}
         <div className="flex flex-row justify-center mt-6">
-          <a href="https://www.facebook.com/Sachin96boy">
+          <a href="https://www.facebook.com/Sachin96boy" type="button">
             <BsFacebook className="w-6 h-6 mr-3 text-gray-400 hover:text-gray-100" />
           </a>
           <a href="https://www.linkedin.com/in/sachin-supunthaka-9b5b3b1b3/">
