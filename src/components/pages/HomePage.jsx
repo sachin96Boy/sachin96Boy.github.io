@@ -7,8 +7,8 @@ import ContactMe from "../body-comp/ContactMe";
 
 function HomePage() {
   return (
-    <div className="h-full w-screen md:left-64 lg:left-64 md:w-[calc(100vw-21rem)] lg:w-[calc(100vw-21rem)] relative">
-      <div className="absolute m-0 right-0 left-0  bg-gradient-to-r from-gray-500 to-gray-900">
+    <div className="h-full w-full lg:left-64 lg:w-[calc(100vw-18rem)] relative">
+      <div className="absolute m-0 right-0 lg:right-12 left-0  bg-gradient-to-r from-gray-500 to-gray-900">
         <HeroSection />
         <MyServices />
         <WorkExperiences />
