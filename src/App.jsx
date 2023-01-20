@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router";
+import { Navigate, Route, Routes } from "react-router";
 
 import VerticleHeader from "./components/header/VerticleHeader";
 import Sidebar from "./components/sidebar/Sidebar";
@@ -6,6 +6,7 @@ import HomePage from "./components/pages/HomePage";
 import Services from "./components/pages/Services";
 import WorkHistory from "./components/pages/WorkHistory";
 import Contact from "./components/pages/Contact";
+import NotFoundPage from "./components/body-comp/NotFoundPage";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/services" element={<Services />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/workhistory" element={<WorkHistory />} />
+          <Route path="*" element={<Navigate to={"/"} replace />} />
         </Routes>
       </div>
       <div className="right-0 fixed  z-50">
