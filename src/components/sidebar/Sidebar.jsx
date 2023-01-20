@@ -18,13 +18,13 @@ function Sidebar() {
 
   let content = (
     <>
-      <div className="flex justify-start m-4 rounded-full bg-gray-700 p-2 md:hidden lg:hidden">
+      <div className="flex justify-start m-4 rounded-full bg-gray-700 p-2 lg:hidden md:overflow-auto">
         <RxHamburgerMenu
           className="w-8 h-8 text-white"
           onClick={toggleSidebar}
         />
       </div>
-      <div className="hidden md:flex lg:flex flex-col w-screen md:w-64 lg:w-64  h-screen px-4 py-2 bg-gray-900 border-gray-700 border-r-4">
+      <div className="hidden lg:flex flex-col w-screen md:w-64 lg:w-64 h-screen  px-4 py-2 bg-gray-900 border-gray-700 border-r-4">
         {/* hanburger Menu close button */}
         <div className="flex justify-start md:hidden lg:hidden">
           <AiOutlineClose
@@ -82,9 +82,7 @@ function Sidebar() {
                 Wayamba University of Sri Lanka
               </div>
               <div className="text-md font-medium my-1">Country</div>
-              <div className="text-sm font-medium text-gray-400">
-                Sri Lanka
-              </div>
+              <div className="text-sm font-medium text-gray-400">Sri Lanka</div>
             </div>
           </div>
         </div>
@@ -119,15 +117,15 @@ function Sidebar() {
     content = (
       <>
         {/* hanburger Menu close button */}
-        <div className="relative ">
-          <div className="flex m-4 absolute justify-start rounded-full bg-gray-700 p-2 md:hidden lg:hidden">
+        <div className="relative">
+          <div className="flex m-4 absolute justify-start rounded-full bg-gray-700 p-2 lg:hidden">
             <AiOutlineClose
               className="w-8 h-8 text-white"
               onClick={toggleSidebar}
             />
           </div>
         </div>
-        <div className="flex flex-col w-screen md:w-64 lg:w-64 lg:h-screen px-4 py-4 bg-gray-900 border-gray-700 border-r-4">
+        <div className="flex flex-col w-screen h-full md:w-64 lg:w-64 lg:h-screen px-4 py-4 bg-gray-900 border-gray-700 border-r-4">
           {/* profile picture with an active button */}
           <div className="flex flex-col items-center justify-between">
             <div className="inline-flex relative">
@@ -192,12 +190,8 @@ function Sidebar() {
                 <div className="text-md font-medium my-1">
                   Language Profiency
                 </div>
-                <div className="text-sm font-medium text-gray-400">
-                  English
-                </div>
-                <div className="text-sm font-medium text-gray-400">
-                  Sinhala
-                </div>
+                <div className="text-sm font-medium text-gray-400">English</div>
+                <div className="text-sm font-medium text-gray-400">Sinhala</div>
               </div>
             </div>
           </div>

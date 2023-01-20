@@ -21,10 +21,10 @@ function VerticleHeader() {
 
   let content = (
     <>
-      <div className="flex justify-start m-6 rounded-full bg-gray-700 p-2 md:hidden lg:hidden">
+      <div className="flex justify-start m-6 rounded-full bg-gray-700 p-2 lg:hidden">
         <SiAngellist className="w-6 h-6 text-white" onClick={toggleSidebar} />
       </div>
-      <header className="hidden md:flex lg:flex w-20 flex-col h-screen px-4 bg-gray-900 border-gray-700 justify-center">
+      <header className="hidden lg:flex w-20 flex-col h-screen px-4 bg-gray-900 border-gray-700 justify-center">
         <nav>
           <ul className="flex flex-col items-center justify-center my-16  gap-8">
             <li>
@@ -88,7 +88,7 @@ function VerticleHeader() {
     content = (
       <>
         <div className="relative">
-          <div className="flex m-6 absolute justify-start rounded-full bg-gray-700 p-2 md:hidden lg:hidden">
+          <div className="flex m-6 absolute justify-start rounded-full bg-gray-700 p-2 lg:hidden">
             <GiAngelOutfit
               className="w-6 h-6 text-red-500"
               onClick={toggleSidebar}

@@ -10,7 +10,7 @@ import Contact from "./components/pages/Contact";
 function App() {
   return (
     <div className="flex flex-col md:flex-row lg:flex-row h-screen">
-      <div className="fixed z-50">
+      <div className="fixed  z-50 overflow-auto">
         <Sidebar />
       </div>
       <div className="flex flex-1">
