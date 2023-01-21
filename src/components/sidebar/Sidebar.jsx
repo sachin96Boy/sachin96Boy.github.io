@@ -9,12 +9,15 @@ import {
 import { AiOutlineClose } from "react-icons/ai";
 import { RxHamburgerMenu } from "react-icons/rx";
 
-function Sidebar() {
+function Sidebar(props) {
   const [isOpen, setIsOpen] = React.useState(false);
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
+    props.setIsDark(!props.isDark)
   };
+
+
 
   let content = (
     <>
