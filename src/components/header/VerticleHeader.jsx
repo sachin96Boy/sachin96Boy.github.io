@@ -46,8 +46,8 @@ function VerticleHeader() {
               </Tooltip>
             </li>
             <li>
-              <Tooltip content="projects" placement="top">
-                <Link to="/projects">
+              <Tooltip content="portfolio" placement="top">
+                <Link to="/portfolio">
                   <div className="bg-slate-700 rounded-full p-2 hover:bg-slate-400">
                     <IconContext.Provider
                       value={{

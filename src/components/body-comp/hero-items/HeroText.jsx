@@ -13,7 +13,7 @@ function HeroText() {
   };
 
   return (
-    <div className="flex flex-col mx-4 z-10">
+    <div className="flex flex-col items-center mx-4 z-10">
       <div className="gap-4">
         <h1 className="text-center my-5 lg:ml-2 text-slate-200  font-bold text-5xl ">
           Web Developer
@@ -25,7 +25,7 @@ function HeroText() {
           3D Animator
         </h1>
       </div>
-      <div className="flex w-full justify-center gap-4 mt-12 ml-4">
+      <div className="flex mt-16 gap-4">
         <Button
           className="rounded-lg text-md outline-none text-slate-200 cursor-pointer"
           size="md"
@@ -46,7 +46,9 @@ function HeroText() {
           >
             Portfolio
           </Button>
-          <div className="relative flex right-6 bottom-12">
+        </div>
+          <div className="relative">
+            <div className="absolute flex -right-3 bottom-14">
             <TbArrowWaveLeftDown
               size={"64"}
               style={{
@@ -56,8 +58,8 @@ function HeroText() {
             <Typography variant="paragraph" className="text-slate-300">
               Visit Me..
             </Typography>
+            </div>
           </div>
-        </div>
       </div>
     </div>
   );
