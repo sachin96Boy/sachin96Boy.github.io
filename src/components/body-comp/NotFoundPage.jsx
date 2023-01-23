@@ -8,7 +8,7 @@ function NotFoundPage() {
         navigator("/");
     }
   return (
-    <div className='w-full bg-blue-gray-900'>
+    <div className='w-full bg-blue-slate-900'>
         <div className='items-center flex flex-col gap-5'>
             <h1>
                 This Web Page Not avaiable

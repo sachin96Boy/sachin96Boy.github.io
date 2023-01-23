@@ -33,10 +33,10 @@ function SachinBoy() {
       mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
       const raycaster = new THREE.Raycaster();
       raycaster.setFromCamera(mouse, camera);
-      const intersects = raycaster.intersectObjects(scene.children, true);
-      if (intersects.length > 0) {
-        console.log(intersects[0].object.name);
-      }
+      // const intersects = raycaster.intersectObjects(scene.children, true);
+      // if (intersects.length > 0) {
+      //   console.log(intersects[0].object.name);
+      // }
       controls.update();
     },
     [camera, scene]
@@ -113,7 +113,7 @@ function SachinBoy() {
     >
       <div className="absolute top-0 left-0 w-full h-full">
         {loading && (
-          <div className="absolute top-0 left-0 w-full h-full bg-gray-400 flex justify-center items-center">
+          <div className="absolute top-0 left-0 w-full h-full bg-slate-700 flex justify-center items-center">
             <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900">
               <div className="animate-ping rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900"></div>
             </div>

@@ -40,24 +40,24 @@ function MyServices() {
   return (
     <div className="w-full">
       <div className="flex flex-col items-center justify-between p-4">
-        <h1 className="text-4xl font-bold text-center text-gray-100 mb-6">
+        <h1 className="text-4xl font-bold text-center text-slate-100 mb-6">
           My Services
         </h1>
-        <div className="flex flex-row justify-center text-gray-300 text-md font-bold my-2">
+        <div className="flex flex-row justify-center text-slate-300 text-md font-bold my-2">
           I am experienced in Full Stack web development, which include the use
           of Javascript, HTML, CSS, and also modern solutions like React and NextJs and back-end technologies like NodeJs and
           Python. I offer website development services for small businesses,
           Blogs, E-commerce, and startup projects.
         </div>
-        <div className="flex flex-row justify-center text-gray-300 text-md font-bold my-2">
+        <div className="flex flex-row justify-center text-slate-300 text-md font-bold my-2">
           I am also experienced in Mobile App development using 
           Flutter. I have developed many mobile apps for small businesses and as solo Projects.
         </div>
-        <div className="flex flex-row justify-center text-gray-300 text-md font-bold my-2">
+        <div className="flex flex-row justify-center text-slate-300 text-md font-bold my-2">
           I am also experienced in 3D Animation and 3D Modeling. I have worked
           on many 3D projects for small businesses and startups.
         </div>
-        <div className="grid grid-cols-3 gap-3 bg-gray-400/50 p-4 rounded-lg backdrop-blur-sm">
+        <div className="grid grid-cols-3 gap-3 bg-slate-400/50 p-4 rounded-lg backdrop-blur-sm">
           {services.map((service, index) => {
             return <ItemCard key={index} {...service} />;
           })}
