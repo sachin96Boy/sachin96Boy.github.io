@@ -37,7 +37,7 @@ function WorkExperiences() {
             </h1>
           </div>
         </div>
-        <div className="w-3/4 bg-white/30 backdrop-blur-lg rounded-md">
+        <div className="w-3/4 bg-slate-300/20 backdrop-blur-sm rounded-md">
           <div className="backdrop-blur-sm">
             <div className="flex flex-col  justify-center h-full">
               {experiencedData}
