@@ -1,5 +1,7 @@
 {
  "name": "Sachin96boy",
+ "description": "Portfolio Website For Sachin Supunthaka",
+ "display": "standalone",
  "icons": [
   {
    "src": "\/android-icon-36x36.png",
@@ -37,5 +39,8 @@
    "type": "image\/png",
    "density": "4.0"
   }
- ]
+ ],
+ "theme_color": "#000000",
+ "background_color": "#ffffff",
+ "start_url": "."
 }
