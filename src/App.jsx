@@ -22,7 +22,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/services" element={<Services />} />
-          <Route path="/portfolio" element={<PortFolio />} />
+          <Route path="/portfolio/*" element={<PortFolio />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/workhistory" element={<WorkHistory />} />
           <Route path="*" element={<Navigate to={"/"} replace />} />

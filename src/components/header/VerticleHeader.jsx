@@ -115,7 +115,7 @@ function VerticleHeader() {
                 </Link>
               </li>
               <li>
-                <Link to="/projects">
+                <Link to="/portfolio">
                   <div className="bg-slate-700 rounded-full p-2 hover:bg-slate-400">
                     <IconContext.Provider
                       value={{

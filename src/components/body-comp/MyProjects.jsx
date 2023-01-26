@@ -33,7 +33,7 @@ function MyProjects() {
       <div className="pt-4">
         <h1 className="text-3xl font-black text-slate-300">My Portfolio Projects</h1>
       </div>
-      <div className="grid grid-cols-1 gap-3 md:grid-cols-2 items-center">
+      <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 items-center mx-4">
         {projectExperience}
       </div>
     </div>
