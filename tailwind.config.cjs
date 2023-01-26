@@ -19,6 +19,9 @@ module.exports = withMT({
         900: "#0f172a",
       },
     },
+    fontFamily:{
+      roboto: ['Roboto', 'sans-serif'],
+    },
     extend: {
       backgroundImage: {
         service: "url('/imageAssets/Night-sky-Image.jpg')",
