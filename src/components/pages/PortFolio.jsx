@@ -1,6 +1,6 @@
 import React from "react";
 import MyProjects from "../body-comp/MyProjects";
-import { Route, Routes } from "react-router";
+import { Navigate, Route, Routes } from "react-router";
 import ProjElements from "../body-comp/ProjElements";
 
 function PortFolio() {
@@ -10,6 +10,7 @@ function PortFolio() {
         <Routes>
           <Route path="project/:id" element={<ProjElements />} />
           <Route path="/" element={<MyProjects />} />
+          <Route path="/*" element={<Navigate to={"/portfolio"} replace/>} />
         </Routes>
       </div>
     </div>
