@@ -36,7 +36,7 @@ function ProjElements(props) {
 
   let ProjContent = <Spinner />;
 
-  if (!loading) {
+  if (project && !loading) {
     ProjContent = (
       <>
         <div
@@ -51,7 +51,7 @@ function ProjElements(props) {
             <h1 className="font-bold text-slate-200 text-xl">{project.name}</h1>
           </div>
           <div>
-            
+
           </div>
           <div className="flex flex-col md:flex-row my-4">
             {project.tags.split(",").map((tag, index) => (
@@ -75,6 +75,19 @@ function ProjElements(props) {
         </div>
       </>
     );
+  }
+
+  if(project === undefined && !loading){
+    ProjContent = <div className="w-full my-12 flex flex-col items-center text-slate-200 h-screen">
+        <h1 className="text-3xl text-center">Item Not Found</h1>
+        <div
+          onClick={handleBack}
+          className="flex items-center justify-center lg:justify-start m-4 py-2 font-bold cursor-pointer text-slate-200"
+        >
+          <AiOutlineArrowLeft className="text-slate-50 text-xl mx-2" />
+          <h2 className="font-black text-center text-xl">Go Back</h2>
+        </div>
+    </div>
   }
 
   return ProjContent;
