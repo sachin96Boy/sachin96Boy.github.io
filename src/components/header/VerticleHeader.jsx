@@ -99,13 +99,11 @@ function VerticleHeader() {
           <nav>
             <ul className="flex flex-col items-center justify-center my-16  gap-8">
               <ul>
-                <Tooltip content="Material Tailwind">
-                  <Link to="/">
-                    <div className="bg-slate-700 rounded-full p-2 hover:bg-slate-400">
-                      <FaHome className="w-6 h-6 text-white hover:text-slate-100" />
-                    </div>
-                  </Link>
-                </Tooltip>
+                <Link to="/">
+                  <div className="bg-slate-700 rounded-full p-2 hover:bg-slate-400">
+                    <FaHome className="w-6 h-6 text-white hover:text-slate-100" />
+                  </div>
+                </Link>
               </ul>
               <li>
                 <Link to="/services">
