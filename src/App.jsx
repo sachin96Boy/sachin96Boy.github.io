@@ -14,7 +14,7 @@ function App() {
   const [isDark, setIsDark] = useState(false);
 
   return (
-    <div className="flex flex-col md:flex-row lg:flex-row h-screen">
+    <div className="flex flex-col md:flex-row lg:flex-row h-screen font-roboto">
       <div className={isDark ? "fixed  z-50 overflow-auto bg-gray-900" : "fixed  z-50 overflow-auto"}>
         <Sidebar isDark={isDark} setIsDark={setIsDark}/>
       </div>
@@ -22,7 +22,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/services" element={<Services />} />
-          <Route path="/portfolio" element={<PortFolio />} />
+          <Route path="/portfolio/*" element={<PortFolio />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/workhistory" element={<WorkHistory />} />
           <Route path="*" element={<Navigate to={"/"} replace />} />

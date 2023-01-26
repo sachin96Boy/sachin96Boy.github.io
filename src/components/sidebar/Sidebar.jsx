@@ -6,18 +6,58 @@ import {
   BsLinkedin,
   BsTwitter,
 } from "react-icons/bs";
+import firebaseApp from "../../firebase/firebase";
+import { getDownloadURL, getStorage, ref } from "firebase/storage";
+
 import { AiOutlineClose } from "react-icons/ai";
 import { RxHamburgerMenu } from "react-icons/rx";
 
 function Sidebar(props) {
   const [isOpen, setIsOpen] = React.useState(false);
+  const storage = getStorage(firebaseApp);
+  const pathReference = ref(
+    storage,
+    `gs://${import.meta.env.VITE_STORAGE_BUCKET}/Portfolio/M.G.S Supunthaka.pdf`
+  );
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
-    props.setIsDark(!props.isDark)
+    props.setIsDark(!props.isDark);
   };
 
+  const handleDownload = () => {
+    getDownloadURL(pathReference)
+      .then((url) => {
+        // This can be downloaded directly:
+        const xhr = new XMLHttpRequest();
+        xhr.responseType = "blob";
+        xhr.onload = (event) => {
+          const blob = xhr.response;
+        };
+        xhr.open("GET", url);
+        xhr.send();
+      })
+      .catch((err) => {
+        console.log(err);
+        switch (err.code) {
+          case "storage/object-not-found":
+            // File doesn't exist
+            break;
+          case "storage/unauthorized":
+            // User doesn't have permission to access the object
+            break;
+          case "storage/canceled":
+            // User canceled the upload
+            break;
 
+          // ...
+
+          case "storage/unknown":
+            // Unknown error occurred, inspect the server response
+            break;
+        }
+      });
+  };
 
   let content = (
     <>
@@ -85,7 +125,9 @@ function Sidebar(props) {
                 Wayamba University of Sri Lanka
               </div>
               <div className="text-md font-medium my-1">Country</div>
-              <div className="text-sm font-medium text-slate-400">Sri Lanka</div>
+              <div className="text-sm font-medium text-slate-400">
+                Sri Lanka
+              </div>
             </div>
           </div>
         </div>
@@ -104,7 +146,10 @@ function Sidebar(props) {
         {/* download cv button */}
         <div className="flex flex-col mt-5">
           <div className="flex flex-col">
-            <button className="bg-slate-800 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded border border-dotted border-white">
+            <button
+              onClick={handleDownload}
+              className="bg-slate-800 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded border border-dotted border-white"
+            >
               <div className="flex flex-row items-center justify-between">
                 Download CV
                 <BsDownload className="w-6 h-6 mr-3 text-slate-400 hover:text-slate-100" />
@@ -193,15 +238,22 @@ function Sidebar(props) {
                 <div className="text-md font-medium my-1">
                   Language Profiency
                 </div>
-                <div className="text-sm font-medium text-slate-400">English</div>
-                <div className="text-sm font-medium text-slate-400">Sinhala</div>
+                <div className="text-sm font-medium text-slate-400">
+                  English
+                </div>
+                <div className="text-sm font-medium text-slate-400">
+                  Sinhala
+                </div>
               </div>
             </div>
           </div>
           {/* download cv button */}
           <div className="flex flex-col mt-5">
             <div className="flex flex-col">
-              <button className="bg-slate-800 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded border border-dotted border-white">
+              <button
+                onClick={handleDownload}
+                className="bg-slate-800 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded border border-dotted border-white"
+              >
                 <div className="flex flex-row items-center justify-between">
                   Download CV
                   <BsDownload className="w-6 h-6 mr-3 text-slate-400 hover:text-slate-100" />
