@@ -13,8 +13,8 @@ function ProjectCard({ name, tags, github, id }) {
       </div>
       <div>
         <h2 className="text-slate-50 text-xl font-semibold">{name}</h2>
-        {TagList.map((tag) => (
-          <Chip className="mt-2 mx-4 border-2 border-slate-400 text-slate-900 bg-slate-300" value={tag} />
+        {TagList.map((tag, index) => (
+          <Chip key={index} className="mt-2 mx-4 border-2 border-slate-400 text-slate-900 bg-slate-300" value={tag} />
         ))}
       </div>
       <div className="flex justify-end mt-4">
