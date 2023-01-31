@@ -53,7 +53,7 @@ function ProjElements(props) {
           </div>
           <div>
             <img
-              className="h-auto max-w-xs rounded-lg shadow-xl shadow-gray-800"
+              className="h-auto max-w-xs lg:max-w-md rounded-lg shadow-xl shadow-gray-800"
               src={project.imgPath ? project.imgPath : projImgPath}
               alt={project.name}
             />
