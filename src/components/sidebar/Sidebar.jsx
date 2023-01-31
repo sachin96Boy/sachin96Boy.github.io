@@ -17,7 +17,7 @@ function Sidebar(props) {
   const storage = getStorage(firebaseApp);
   const pathReference = ref(
     storage,
-    `gs://${import.meta.env.VITE_STORAGE_BUCKET}/Portfolio/M.G.S Supunthaka.pdf`
+    `${import.meta.env.VITE_STORAGE_BUCKT_URL}/M.G.S Supunthaka.pdf`
   );
 
   const toggleSidebar = () => {

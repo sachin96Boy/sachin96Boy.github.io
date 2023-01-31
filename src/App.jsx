@@ -15,7 +15,7 @@ function App() {
 
   return (
     <div className="flex flex-col md:flex-row lg:flex-row h-screen font-roboto">
-      <div className={isDark ? "fixed  z-50 overflow-auto bg-gray-900" : "fixed  z-50 overflow-auto"}>
+      <div className={isDark ? "fixed  z-50 overflow-auto bg-slate-900" : "fixed  z-50 overflow-auto"}>
         <Sidebar isDark={isDark} setIsDark={setIsDark}/>
       </div>
       <div className="flex flex-1">
