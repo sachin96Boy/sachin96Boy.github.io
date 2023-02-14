@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FaHome } from "react-icons/fa";
 import {
   MdHomeWork,
@@ -13,7 +13,8 @@ import { GiAngelOutfit } from "react-icons/gi";
 import { Navbar, Tooltip, Typography } from "@material-tailwind/react";
 
 function VerticleHeader() {
-  let [isOpenHeader, setIsOpenHeader] = React.useState(false);
+  const [isOpenHeader, setIsOpenHeader] = React.useState(false);
+
 
   const toggleSidebar = () => {
     setIsOpenHeader(!isOpenHeader);

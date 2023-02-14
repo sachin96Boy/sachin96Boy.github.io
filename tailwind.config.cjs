@@ -24,8 +24,8 @@ module.exports = withMT({
     },
     extend: {
       backgroundImage: {
-        service: "url('/imageAssets/Night-sky-Image.jpg')",
-        contactbg: "url('/imageAssets/mybanner.jpg')",
+        service: "url('/imageAssets/Night-sky-Image.webp')",
+        contactbg: "url('/imageAssets/mybanner.webp')",
       },
     },
   },
