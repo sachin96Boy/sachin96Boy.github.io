@@ -21,8 +21,6 @@ function Sidebar(props) {
   const [socialDetails, setSocialDetails] = useState();
   const [loading, setLoading] = useState(true);
 
-  console.log(socialDetails);
-
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_DATABASE_URL}social.json`)
