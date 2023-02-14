@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   BsDownload,
   BsFacebook,
@@ -11,10 +11,29 @@ import { getDownloadURL, getStorage, ref } from "firebase/storage";
 
 import { AiOutlineClose } from "react-icons/ai";
 import { RxHamburgerMenu } from "react-icons/rx";
+import axios from "axios";
+import Spinner from "../body-comp/item-components/Spinner";
 
 function Sidebar(props) {
-  const [isOpen, setIsOpen] = React.useState(false);
   const storage = getStorage(firebaseApp);
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [socialDetails, setSocialDetails] = useState();
+  const [loading, setLoading] = useState(true);
+
+  console.log(socialDetails);
+
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_DATABASE_URL}social.json`)
+      .then((res) => {
+        setSocialDetails(res.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   const pathReference = ref(
     storage,
     `${import.meta.env.VITE_STORAGE_BUCKT_URL}/M.G.S Supunthaka.pdf`
@@ -82,7 +101,7 @@ function Sidebar(props) {
             <div className="absolute bottom-2 right-5 p-2 bg-green-500 rounded-full border-2 border-white"></div>
             <img
               className="w-44 h-44 mx-auto rounded-full p-1 border-2 border-slate-700"
-              src="https://i.ibb.co/sVqvB3h/My-image.jpg"
+              src="https://i.ibb.co/tM0THCd/My-image.webp"
               alt="profile"
             />
           </div>
@@ -99,20 +118,24 @@ function Sidebar(props) {
           </div>
         </div>
         {/* list of social media set */}
-        <div className="flex flex-row justify-center mt-6">
-          <a href="https://www.facebook.com/Sachin96boy" type="button">
-            <BsFacebook className="w-6 h-6 mr-3 text-slate-400 hover:text-slate-100" />
-          </a>
-          <a href="https://www.linkedin.com/in/sachin-supunthaka-9b5b3b1b3/">
-            <BsLinkedin className="w-6 h-6 mr-3 text-slate-400 hover:text-slate-100" />
-          </a>
-          <a href="https://www.twitter.com/SACHINSUPUNTHAK">
-            <BsTwitter className="w-6 h-6 mr-3 text-slate-400 hover:text-slate-100" />
-          </a>
-          <a href="https://www.github.com/Sachin96Boy">
-            <BsGithub className="w-6 h-6 mr-3 text-slate-400 hover:text-slate-100" />
-          </a>
-        </div>
+        {loading ? (
+          <Spinner />
+        ) : (
+          <div className="flex flex-row justify-center mt-6">
+            <a href={socialDetails.facebook} type="button">
+              <BsFacebook className="w-6 h-6 mr-3 text-slate-400 hover:text-slate-100" />
+            </a>
+            <a href={socialDetails.linkdin}>
+              <BsLinkedin className="w-6 h-6 mr-3 text-slate-400 hover:text-slate-100" />
+            </a>
+            <a href={socialDetails.twitter}>
+              <BsTwitter className="w-6 h-6 mr-3 text-slate-400 hover:text-slate-100" />
+            </a>
+            <a href={socialDetails.github}>
+              <BsGithub className="w-6 h-6 mr-3 text-slate-400 hover:text-slate-100" />
+            </a>
+          </div>
+        )}
         {/* personal info section */}
         <div className="flex flex-col mt-5">
           <div className="flex flex-row items-center py-2 px-4 rounded-lg text-slate-100 bg-slate-800">
