@@ -78,12 +78,12 @@ function Sidebar(props) {
 
   let content = (
     <>
-      <div className="flex justify-start m-4 rounded-full bg-slate-700 p-2 lg:hidden md:overflow-auto">
+      {/* <div className="flex justify-start m-4 rounded-full bg-slate-700 p-2 lg:hidden md:overflow-auto">
         <RxHamburgerMenu
           className="w-8 h-8 text-white"
           onClick={toggleSidebar}
         />
-      </div>
+      </div> */}
       <div className="hidden lg:flex flex-col w-screen md:w-64 lg:w-64 h-screen  px-4 py-2 bg-slate-900 border-slate-700 border-r-4">
         {/* hanburger Menu close button */}
         <div className="flex justify-start md:hidden lg:hidden">
