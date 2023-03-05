@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Logo from "./Logo";
 import { BiMenuAltLeft } from "react-icons/bi";
-import { GrClose } from "react-icons/gr";
 import {
   BsDownload,
   BsFacebook,
@@ -9,12 +8,11 @@ import {
   BsLinkedin,
   BsTwitter,
 } from "react-icons/bs";
+import { AiOutlineClose } from "react-icons/ai";
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
 
 import firebaseApp from "../firebase/firebase";
 import axios from "axios";
-import { IconContext } from "react-icons";
-import { AiOutlineClose } from "react-icons/ai";
 
 function Header() {
   const storage = getStorage(firebaseApp);
