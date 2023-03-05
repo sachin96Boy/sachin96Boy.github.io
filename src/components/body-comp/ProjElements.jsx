@@ -35,7 +35,7 @@ function ProjElements(props) {
   };
 
   let ProjContent = <Spinner />;
-  let projImgPath = "../../imageAssets/Night-sky-Image.jpg";
+  let projImgPath = "../../imageAssets/Night-sky-Image.webp";
 
   if (project && !loading) {
     ProjContent = (
@@ -97,7 +97,7 @@ function ProjElements(props) {
     );
   }
 
-  return ProjContent;
+  return <div className="min-h-screen">{ProjContent}</div>;
 }
 
 export default ProjElements;
