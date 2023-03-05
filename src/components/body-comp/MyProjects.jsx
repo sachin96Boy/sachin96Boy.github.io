@@ -4,7 +4,7 @@ import ProjectCard from "./item-components/ProjectCard";
 import Spinner from "./item-components/Spinner";
 import axios from "axios";
 
-import MyImage from "../../assets/3dimage.png";
+import MyImage from "../../assets/3dimage.webp";
 
 function MyProjects() {
   const [projects, setProjects] = useState();
