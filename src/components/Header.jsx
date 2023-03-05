@@ -9,7 +9,7 @@ import {
   BsLinkedin,
   BsTwitter,
 } from "react-icons/bs";
-import { getStorage, ref } from "firebase/storage";
+import { getDownloadURL, getStorage, ref } from "firebase/storage";
 
 import firebaseApp from "../firebase/firebase";
 import axios from "axios";
@@ -88,7 +88,7 @@ function Header() {
     headerContent = (
       <div className="flex flex-col bg-slate-900 w-full z-50 py-3  top-0 bottom-0 fixed overflow-y-scroll overflow-x-hidden">
         <div className="flex flex-row items-center text-2xl px-5 justify-between">
-          <AiOutlineClose className="text-red-800" onClick={toggleSidebar} />
+          <AiOutlineClose className="text-slate-200" onClick={toggleSidebar} />
           <Logo />
         </div>
         <div className="mx-5">
