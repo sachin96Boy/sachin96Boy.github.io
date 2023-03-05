@@ -22,9 +22,9 @@ function VerticleHeader() {
 
   let content = (
     <>
-      <div className="flex justify-start m-6 rounded-full bg-slate-700 p-2 lg:hidden">
+      {/* <div className="flex justify-start m-6 rounded-full bg-slate-700 p-2 lg:hidden">
         <SiAngellist className="w-6 h-6 text-white" onClick={toggleSidebar} />
-      </div>
+      </div> */}
       <header className="hidden lg:flex w-20 flex-col h-screen px-4 bg-slate-900 border-slate-700 justify-center">
         <nav>
           <ul className="flex flex-col items-center justify-center my-16  gap-8">

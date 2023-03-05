@@ -8,15 +8,24 @@ import Services from "./components/pages/Services";
 import WorkHistory from "./components/pages/WorkHistory";
 import Contact from "./components/pages/Contact";
 import PortFolio from "./components/pages/PortFolio";
-
+import Header from "./components/Header";
 
 function App() {
   const [isDark, setIsDark] = useState(false);
 
   return (
-    <div className="flex flex-col md:flex-row lg:flex-row h-screen font-roboto">
-      <div className={isDark ? "fixed  z-50 overflow-auto bg-slate-900" : "fixed  z-50 overflow-auto"}>
-        <Sidebar isDark={isDark} setIsDark={setIsDark}/>
+    <div className="flex flex-col lg:flex-row h-screen font-roboto">
+      <div
+        className={
+          isDark
+            ? "fixed  z-50 overflow-auto bg-slate-900"
+            : "fixed  z-50 overflow-auto"
+        }
+      >
+        <Sidebar isDark={isDark} setIsDark={setIsDark} />
+      </div>
+      <div className="flex w-full lg:hidden">
+        <Header />
       </div>
       <div className="flex flex-1">
         <Routes>
