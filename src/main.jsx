@@ -11,7 +11,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <ThemeProvider>
     <BrowserRouter>
       <App />
-      <Analytics />
+      <Analytics mode="production"/>
     </BrowserRouter>
   </ThemeProvider>
 );
