@@ -4,7 +4,7 @@ function Footer() {
   return (
     <div className="items-center bg-slate-900 text-slate-200">
       <footer>
-        <div className="container px-6 pt-6">
+        <div className="px-6 pt-6">
           <div className="flex justify-center mb-6">
             <a
               href="https://www.facebook.com/Sachin96boy"
