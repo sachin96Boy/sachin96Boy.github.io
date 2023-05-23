@@ -4,11 +4,11 @@ function Footer() {
   return (
     <div className="items-center bg-slate-900 text-slate-200">
       <footer>
-        <div className="container px-6 pt-6">
+        <div className="px-6 pt-6">
           <div className="flex justify-center mb-6">
             <a
               href="https://www.facebook.com/Sachin96boy"
-              className="rounded-full cursor-pointer border-2 border-white text-white leading-normal uppercase hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out w-9 h-9 m-1"
+              className="rounded-full cursor-pointer border-2 border-white text-white leading-normal uppercase hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out w-9 h-9 m-1 bg-slate-900"
             >
               <svg
                 aria-hidden="true"
@@ -50,7 +50,7 @@ function Footer() {
             </a>
 
             <a
-              href="https://www.linkedin.com/in/sachin-supunthaka-5398aa148/"
+              href="https://www.linkedin.com/in/sachin96boy/"
               type="button"
               className="rounded-full border-2 border-white text-white leading-normal uppercase hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out w-9 h-9 m-1"
             >

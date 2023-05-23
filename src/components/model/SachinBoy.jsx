@@ -111,7 +111,7 @@ function SachinBoy() {
       ref={refContainer}
       className="m-auto h-screen overflow-hidden"
     >
-      <div className="absolute top-0 left-0 w-full h-full">
+      <div className="absolute top-0 left-0 w-full">
         {loading && (
           <div className="absolute top-0 left-0 w-full h-full bg-slate-700 flex justify-center items-center">
             <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900">
