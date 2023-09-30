@@ -34,7 +34,7 @@ function Sidebar(props) {
   }, []);
   const pathReference = ref(
     storage,
-    `${import.meta.env.VITE_STORAGE_BUCKT_URL}/M.G.S Supunthaka.pdf`
+    `${import.meta.env.VITE_STORAGE_BUCKT_URL}/sachinsupunthaka.pdf`
   );
 
   const toggleSidebar = () => {
@@ -42,8 +42,8 @@ function Sidebar(props) {
     props.setIsDark(!props.isDark);
   };
 
-  const handleDownload = () => {
-    getDownloadURL(pathReference)
+  const handleDownload = async () => {
+    await getDownloadURL(pathReference)
       .then((url) => {
         // This can be downloaded directly:
         const xhr = new XMLHttpRequest();
