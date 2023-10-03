@@ -201,7 +201,7 @@ function Sidebar(props) {
               <div className="absolute bottom-2 right-3 p-2 bg-green-500 rounded-full border-2 border-white"></div>
               <img
                 className="w-28 h-28 mx-auto rounded-full p-1 border-2 border-slate-700"
-                src="https://i.ibb.co/sVqvB3h/My-image.jpg"
+                src="https://i.ibb.co/tM0THCd/My-image.webp"
                 alt="profile"
               />
             </div>
