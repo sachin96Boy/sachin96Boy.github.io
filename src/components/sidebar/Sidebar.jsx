@@ -222,10 +222,10 @@ function Sidebar(props) {
             <a dir="https://www.facebook.com/Sachin96boy">
               <BsFacebook className="w-6 h-6 mr-3 text-slate-400 hover:text-slate-100" />
             </a>
-            <a href="https://www.linkedin.com/in/sachin-supunthaka-9b5b3b1b3/">
+            <a href="https://www.linkedin.com/in/sachin96boy/">
               <BsLinkedin className="w-6 h-6 mr-3 text-slate-400 hover:text-slate-100" />
             </a>
-            <a href="https://www.twitter.com/SACHINSUPUNTHAK">
+            <a href="https://www.twitter.com/sachin96boy">
               <BsTwitter className="w-6 h-6 mr-3 text-slate-400 hover:text-slate-100" />
             </a>
             <a href="https://www.github.com/Sachin96Boy">
