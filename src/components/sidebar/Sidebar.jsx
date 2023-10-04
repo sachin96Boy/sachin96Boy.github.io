@@ -84,7 +84,7 @@ function Sidebar(props) {
           onClick={toggleSidebar}
         />
       </div> */}
-      <div className="hidden lg:flex flex-col w-screen md:w-64 lg:w-64 h-screen  px-4 py-2 bg-slate-900 border-slate-700 border-r-4">
+      <div className="hidden lg:flex flex-col w-screen md:w-64 lg:w-64 h-screen   px-4 py-2 bg-slate-900 border-slate-700 border-r-4">
         {/* hanburger Menu close button */}
         <div className="flex justify-start md:hidden lg:hidden">
           <AiOutlineClose
@@ -194,7 +194,7 @@ function Sidebar(props) {
             />
           </div>
         </div>
-        <div className="flex flex-col w-screen h-screen md:w-64 lg:w-64 lg:h-screen px-4 py-4 bg-slate-900 border-slate-700 border-r-4">
+        <div className="flex flex-col h-screen md:w-64 lg:w-64 lg:h-screen px-4 py-4 bg-slate-900 border-slate-700 border-r-4">
           {/* profile picture with an active button */}
           <div className="flex flex-col items-center justify-between">
             <div className="inline-flex relative">
