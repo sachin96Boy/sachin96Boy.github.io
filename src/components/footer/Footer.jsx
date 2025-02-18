@@ -101,7 +101,7 @@ function Footer() {
             backgroundColor: "rgba(0, 0, 0, 0.2)",
           }}
         >
-          © 2023
+          © {new Date().getFullYear()}
           <a
             className="text-whitehite ml-2"
             href="https://github.com/sachin96Boy"
