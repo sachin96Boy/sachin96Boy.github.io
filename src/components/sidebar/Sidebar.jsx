@@ -14,6 +14,8 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import axios from "axios";
 import Spinner from "../body-comp/item-components/Spinner";
 
+import profilepic from "../../assets/gg-email.webp";
+
 function Sidebar(props) {
   const storage = getStorage(firebaseApp);
 
@@ -99,7 +101,7 @@ function Sidebar(props) {
             <div className="absolute bottom-2 right-5 p-2 bg-green-500 rounded-full border-2 border-white"></div>
             <img
               className="w-44 h-44 mx-auto rounded-full p-1 border-2 border-slate-700"
-              src="https://i.ibb.co/tM0THCd/My-image.webp"
+              src={profilepic}
               alt="profile"
             />
           </div>
