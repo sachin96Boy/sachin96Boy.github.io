@@ -27,7 +27,7 @@ function ProjectCard({ name, tags, github, id }) {
       </ul>
       <Link
         to={`project/${id}`}
-        className="mt-auto inline-flex items-center gap-1 self-end rounded font-medium text-accent hover:text-accent-hover"
+        className="mt-auto inline-flex items-center gap-1 self-end rounded-sm font-medium text-accent hover:text-accent-hover"
       >
         See more<span className="sr-only"> about {name}</span>
         <TbArrowRight aria-hidden="true" className="h-4 w-4" />

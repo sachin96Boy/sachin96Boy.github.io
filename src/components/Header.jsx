@@ -42,7 +42,7 @@ function Header() {
 
   return (
     <header className="sticky top-0 z-40 lg:hidden">
-      <div className="flex h-14 items-center justify-between border-b border-line bg-surface/90 px-2 backdrop-blur">
+      <div className="flex h-14 items-center justify-between border-b border-line bg-surface/90 px-2 backdrop-blur-sm">
         <button
           ref={menuButtonRef}
           type="button"

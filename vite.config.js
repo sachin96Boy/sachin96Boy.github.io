@@ -1,11 +1,12 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react-swc'
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react-swc";
+import tailwindcss from "@tailwindcss/vite";
 
-// https://vitejs.dev/config/
+// https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [tailwindcss(), react()],
   build: {
-    // The lazily loaded 3D avatar chunk is mostly three.js (~540 kB, ~145 kB gzipped).
-    chunkSizeWarningLimit: 600,
+    // The lazily loaded 3D avatar chunk is mostly three.js (~665 kB, ~170 kB gzipped).
+    chunkSizeWarningLimit: 700,
   },
-})
+});

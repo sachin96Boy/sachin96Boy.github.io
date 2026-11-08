@@ -9,8 +9,8 @@
  * - Renders only while on screen and the tab is visible. Honors prefers-reduced-motion.
  */
 import * as THREE from "three";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
-import { MeshoptDecoder } from "three/examples/jsm/libs/meshopt_decoder.module.js";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { MeshoptDecoder } from "three/addons/libs/meshopt_decoder.module.js";
 
 const MODEL_URL = "/3delems/sachin96Boy.min.glb";
 const MOTIONS_URL = "/3delems/avatar-motions.json";
@@ -59,7 +59,6 @@ export function createAvatarScene(container, options = {}) {
     alpha: true,
     powerPreference: "low-power",
   });
-  renderer.outputEncoding = THREE.sRGBEncoding;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.05;
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
@@ -75,19 +74,20 @@ export function createAvatarScene(container, options = {}) {
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(FOV, 1, 0.1, 50);
 
-  scene.add(new THREE.HemisphereLight(0xf1f5f9, 0x1e293b, 0.9));
-  const key = new THREE.DirectionalLight(0xffffff, 1.35);
+  // Physical light units (three r155+): ≈ π × the old legacy-mode intensities.
+  scene.add(new THREE.HemisphereLight(0xf1f5f9, 0x1e293b, 0.9 * Math.PI));
+  const key = new THREE.DirectionalLight(0xffffff, 1.35 * Math.PI);
   key.position.set(1.6, 3, 2.6);
   scene.add(key);
-  const fill = new THREE.DirectionalLight(0xcbd5e1, 0.35);
+  const fill = new THREE.DirectionalLight(0xcbd5e1, 0.35 * Math.PI);
   fill.position.set(-2.5, 1.5, 1.5);
   scene.add(fill);
-  const rim = new THREE.DirectionalLight(0x86efac, 0.9); // accent-tinted rim light
+  const rim = new THREE.DirectionalLight(0x86efac, 0.75 * Math.PI); // accent-tinted rim light
   rim.position.set(-1.5, 2.6, -2.5);
   scene.add(rim);
 
   // --- state ---------------------------------------------------------------
-  const clock = new THREE.Clock(false);
+  const timer = new THREE.Timer();
   let disposed = false;
   let loaded = false;
   let running = false;
@@ -271,8 +271,9 @@ export function createAvatarScene(container, options = {}) {
     renderer.render(scene, camera);
   }
 
-  function tick() {
-    const dt = Math.min(clock.getDelta(), MAX_DT);
+  function tick(timestamp) {
+    timer.update(timestamp);
+    const dt = Math.min(timer.getDelta(), MAX_DT);
     updateWeights(dt);
     updateGestureState(dt);
     mixer.update(dt);
@@ -290,13 +291,11 @@ export function createAvatarScene(container, options = {}) {
   function ensureLoop() {
     const want = shouldRun();
     if (want && !running) {
-      clock.start();
-      clock.getDelta();
+      timer.reset(); // no catch-up jump after a pause
       renderer.setAnimationLoop(tick);
       running = true;
     } else if (!want && running) {
       renderer.setAnimationLoop(null);
-      clock.stop();
       running = false;
       if (loaded && !disposed) render();
     }
@@ -444,6 +443,7 @@ export function createAvatarScene(container, options = {}) {
       if (model) mixer.uncacheRoot(model);
     }
     if (model) disposeObject(model);
+    timer.dispose();
     renderer.dispose();
     renderer.forceContextLoss();
     canvas.remove();

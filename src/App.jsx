@@ -17,7 +17,7 @@ function App() {
     <>
       <a
         href="#main"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-accent focus:px-4 focus:py-2 focus:font-semibold focus:text-on-accent"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-100 focus:rounded-lg focus:bg-accent focus:px-4 focus:py-2 focus:font-semibold focus:text-on-accent"
       >
         Skip to content
       </a>
@@ -27,7 +27,7 @@ function App() {
       <main
         id="main"
         tabIndex={-1}
-        className="flex min-h-[100dvh] flex-col focus-visible:ring-0 lg:pl-64 lg:pr-20"
+        className="flex min-h-dvh flex-col focus-visible:ring-0 lg:pl-64 lg:pr-20"
       >
         <div className="flex-1">
           <Routes>

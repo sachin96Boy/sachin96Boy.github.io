@@ -84,7 +84,7 @@ function SachinBoy() {
         <button
           type="button"
           onClick={() => sceneRef.current?.playNextGesture()}
-          className="btn absolute bottom-4 left-1/2 -translate-x-1/2 border border-line bg-surface/80 text-sm text-fg backdrop-blur hover:border-accent hover:text-accent"
+          className="btn absolute bottom-4 left-1/2 -translate-x-1/2 border border-line bg-surface/80 text-sm text-fg backdrop-blur-sm hover:border-accent hover:text-accent"
         >
           <TbHandStop aria-hidden="true" className="h-5 w-5" />
           Say hi

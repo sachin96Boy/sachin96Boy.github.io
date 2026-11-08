@@ -24,7 +24,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import * as THREE from "three";
-import { BVHLoader } from "three/examples/jsm/loaders/BVHLoader.js";
+import { BVHLoader } from "three/addons/loaders/BVHLoader.js";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const MOTION_DIR = process.env.MOTION_DIR ?? "E:/motion";

@@ -6,7 +6,7 @@ function Logo() {
     <Link
       to="/"
       aria-label={`${profile.handle}, home`}
-      className="rounded font-mono text-base font-semibold text-fg"
+      className="rounded-sm font-mono text-base font-semibold text-fg"
     >
       {profile.handle}
       <span className="text-accent">.</span>
