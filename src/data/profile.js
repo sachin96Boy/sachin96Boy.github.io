@@ -16,12 +16,12 @@ export const profile = {
 export const mailto = `mailto:${profile.email}`;
 
 /**
- * Fallback social links, used until (or if) the Firebase `social.json` request fails.
- * Keys match the database (`linkdin` is spelled that way in the DB).
+ * Fallback social links, shown until the Firebase `social` data arrives (or if it fails).
+ * Keys match the normalized data from src/lib/firebaseData.js.
  */
 export const fallbackSocial = {
   facebook: "https://www.facebook.com/Sachin96boy",
-  linkdin: "https://www.linkedin.com/in/sachin96boy/",
+  linkedin: "https://www.linkedin.com/in/sachin96boy/",
   twitter: "https://www.twitter.com/sachin96boy",
   github: "https://www.github.com/Sachin96Boy",
 };

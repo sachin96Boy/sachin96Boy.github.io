@@ -1,13 +1,14 @@
 import ProjectCard from "./item-components/ProjectCard";
 import Spinner from "./item-components/Spinner";
 import LoadError from "./item-components/LoadError";
-import { useFirebaseJson } from "../../hooks/useFirebaseJson";
+import { useFirebaseData } from "../../hooks/useFirebaseData";
+import { getProjects, getSocial } from "../../lib/firebaseData";
 import illustration from "../../assets/3dimage.webp";
 
 function MyProjects({ titleAs: Title = "h2" }) {
-  const projects = useFirebaseJson("Projects", { expect: "array" });
-  const { data: social } = useFirebaseJson("social", { expect: "object" });
-  const list = (projects.data ?? []).filter(Boolean);
+  const projects = useFirebaseData("projects", getProjects);
+  const { data: social } = useFirebaseData("social", getSocial);
+  const list = projects.data ?? [];
 
   let content;
   if (projects.loading) content = <Spinner label="Loading projects…" />;

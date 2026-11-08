@@ -3,7 +3,8 @@ import { TbArrowLeft, TbExternalLink } from "react-icons/tb";
 import Spinner from "./item-components/Spinner";
 import LoadError from "./item-components/LoadError";
 import { splitTags } from "./item-components/ProjectCard";
-import { useFirebaseJson } from "../../hooks/useFirebaseJson";
+import { useFirebaseData } from "../../hooks/useFirebaseData";
+import { getProjects } from "../../lib/firebaseData";
 
 const FALLBACK_IMAGE = "/imageAssets/Night-sky-Image.webp";
 
@@ -19,8 +20,8 @@ function BackButton() {
 
 function ProjElements() {
   const { id } = useParams();
-  const { data, loading, error, retry } = useFirebaseJson("Projects", { expect: "array" });
-  const project = (data ?? []).filter(Boolean).find((p) => String(p.id) === id);
+  const { data, loading, error, retry } = useFirebaseData("projects", getProjects);
+  const project = (data ?? []).find((p) => String(p.id) === id);
 
   let content;
   if (loading) {
@@ -35,8 +36,7 @@ function ProjElements() {
       </div>
     );
   } else {
-    // "Refference" is the field name used in the database.
-    const link = project.Refference;
+    const link = project.reference;
     content = (
       <article className="flex flex-col items-center text-center">
         <h1 className="section-title">{project.name}</h1>

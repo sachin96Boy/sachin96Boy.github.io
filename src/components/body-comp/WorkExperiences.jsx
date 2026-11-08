@@ -1,11 +1,12 @@
 import WorkExperienceCard from "./item-components/WorkExperienceCard";
 import Spinner from "./item-components/Spinner";
 import LoadError from "./item-components/LoadError";
-import { useFirebaseJson } from "../../hooks/useFirebaseJson";
+import { useFirebaseData } from "../../hooks/useFirebaseData";
+import { getWorkExperience } from "../../lib/firebaseData";
 
 function WorkExperiences({ titleAs: Title = "h2" }) {
-  const { data, loading, error, retry } = useFirebaseJson("workExperience", { expect: "array" });
-  const work = (data ?? []).filter(Boolean);
+  const { data, loading, error, retry } = useFirebaseData("workExperience", getWorkExperience);
+  const work = data ?? [];
 
   let content;
   if (loading) content = <Spinner label="Loading work experience…" />;

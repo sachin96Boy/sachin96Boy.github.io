@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "bake:motions": "node scripts/bake-motions.mjs"
+    "bake:motions": "node scripts/bake-motions.mjs",
+    "migrate:db": "node scripts/migrate-db-fields.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "^0.1.11",

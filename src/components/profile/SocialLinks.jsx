@@ -1,18 +1,20 @@
 import { TbBrandFacebook, TbBrandGithub, TbBrandLinkedin, TbBrandTwitter } from "react-icons/tb";
-import { useFirebaseJson } from "../../hooks/useFirebaseJson";
+import { useFirebaseData } from "../../hooks/useFirebaseData";
+import { getSocial } from "../../lib/firebaseData";
 import { fallbackSocial } from "../../data/profile";
 
 const LINKS = [
   { key: "github", label: "GitHub", icon: TbBrandGithub },
-  { key: "linkdin", label: "LinkedIn", icon: TbBrandLinkedin }, // DB key is spelled "linkdin"
+  { key: "linkedin", label: "LinkedIn", icon: TbBrandLinkedin },
   { key: "twitter", label: "Twitter", icon: TbBrandTwitter },
   { key: "facebook", label: "Facebook", icon: TbBrandFacebook },
 ];
 
 /** Social profile links. Renders immediately from fallbacks, then uses the Firebase values. */
 function SocialLinks({ className = "" }) {
-  const { data } = useFirebaseJson("social", { expect: "object" });
-  const social = { ...fallbackSocial, ...(data ?? {}) };
+  const { data } = useFirebaseData("social", getSocial);
+  const social = { ...fallbackSocial };
+  for (const [key, value] of Object.entries(data ?? {})) if (value) social[key] = value;
 
   return (
     <ul className={`flex items-center gap-1 ${className}`}>
