@@ -1,4 +1,4 @@
-import WorkExperenceCard from "./item-components/WorkExperenceCard";
+import WorkExperienceCard from "./item-components/WorkExperienceCard";
 import Spinner from "./item-components/Spinner";
 import LoadError from "./item-components/LoadError";
 import { useFirebaseJson } from "../../hooks/useFirebaseJson";
@@ -15,7 +15,7 @@ function WorkExperiences({ titleAs: Title = "h2" }) {
       <ol className="space-y-4">
         {work.map((item, index) => (
           <li key={`${item.company}-${item.position}-${item.duration ?? index}`}>
-            <WorkExperenceCard {...item} />
+            <WorkExperienceCard {...item} />
           </li>
         ))}
       </ol>

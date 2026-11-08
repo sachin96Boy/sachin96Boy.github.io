@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 
-import VerticleHeader from "./components/header/VerticleHeader";
+import VerticalHeader from "./components/header/VerticalHeader";
 import Sidebar from "./components/sidebar/Sidebar";
 import Header from "./components/Header";
 import Footer from "./components/footer/Footer";
@@ -9,7 +9,7 @@ import HomePage from "./components/pages/HomePage";
 import Services from "./components/pages/Services";
 import WorkHistory from "./components/pages/WorkHistory";
 import Contact from "./components/pages/Contact";
-import PortFolio from "./components/pages/PortFolio";
+import Portfolio from "./components/pages/Portfolio";
 import NotFoundPage from "./components/body-comp/NotFoundPage";
 
 function App() {
@@ -33,7 +33,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/services" element={<Services />} />
-            <Route path="/portfolio/*" element={<PortFolio />} />
+            <Route path="/portfolio/*" element={<Portfolio />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/workhistory" element={<WorkHistory />} />
             <Route path="*" element={<NotFoundPage />} />
@@ -41,7 +41,7 @@ function App() {
         </div>
         <Footer />
       </main>
-      <VerticleHeader />
+      <VerticalHeader />
     </>
   );
 }

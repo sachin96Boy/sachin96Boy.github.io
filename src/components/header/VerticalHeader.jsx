@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import { navigation } from "../../data/navigation";
 
 /** Fixed icon navigation rail on the right (desktop only). */
-function VerticleHeader() {
+function VerticalHeader() {
   return (
     <nav
       aria-label="Primary"
@@ -39,4 +39,4 @@ function VerticleHeader() {
   );
 }
 
-export default VerticleHeader;
+export default VerticalHeader;

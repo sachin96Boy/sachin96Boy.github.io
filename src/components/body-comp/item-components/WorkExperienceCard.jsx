@@ -1,6 +1,6 @@
 import { TbBriefcase, TbCalendar } from "react-icons/tb";
 
-function WorkExperenceCard({ company, position, duration, description }) {
+function WorkExperienceCard({ company, position, duration, description }) {
   return (
     <article className="card">
       <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
@@ -23,4 +23,4 @@ function WorkExperenceCard({ company, position, duration, description }) {
   );
 }
 
-export default WorkExperenceCard;
+export default WorkExperienceCard;

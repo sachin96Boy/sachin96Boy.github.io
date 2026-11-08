@@ -2,7 +2,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import MyProjects from "../body-comp/MyProjects";
 import ProjElements from "../body-comp/ProjElements";
 
-function PortFolio() {
+function Portfolio() {
   return (
     <Routes>
       <Route path="project/:id" element={<ProjElements />} />
@@ -12,4 +12,4 @@ function PortFolio() {
   );
 }
 
-export default PortFolio;
+export default Portfolio;
