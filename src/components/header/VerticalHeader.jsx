@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router";
 import { navigation } from "../../data/navigation";
 
 /** Fixed icon navigation rail on the right (desktop only). */
@@ -28,7 +28,7 @@ function VerticalHeader() {
             {/* Visual tooltip; the link's aria-label carries the accessible name. */}
             <span
               aria-hidden="true"
-              className="pointer-events-none absolute right-full top-1/2 mr-3 -translate-y-1/2 whitespace-nowrap rounded-md border border-line bg-surface-2 px-2.5 py-1 text-sm text-fg opacity-0 shadow-lg transition-opacity duration-150 group-focus-within:opacity-100 group-hover:opacity-100"
+              className="pointer-events-none absolute right-full top-1/2 mr-3 -translate-y-1/2 whitespace-nowrap rounded-md border border-line bg-surface-2 px-2.5 py-1 text-sm text-fg opacity-0 shadow-lg transition-opacity duration-150 group-hover:opacity-100 group-has-focus-visible:opacity-100"
             >
               {label}
             </span>

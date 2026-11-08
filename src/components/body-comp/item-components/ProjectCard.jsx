@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { TbArrowRight, TbBrandGithub, TbWorld } from "react-icons/tb";
 
 export const splitTags = (tags) =>

@@ -1,27 +1,7 @@
 import WorkExperienceCard from "./item-components/WorkExperienceCard";
-import Spinner from "./item-components/Spinner";
-import LoadError from "./item-components/LoadError";
-import { useFirebaseData } from "../../hooks/useFirebaseData";
-import { getWorkExperience } from "../../lib/firebaseData";
 
-function WorkExperiences({ titleAs: Title = "h2" }) {
-  const { data, loading, error, retry } = useFirebaseData("workExperience", getWorkExperience);
-  const work = data ?? [];
-
-  let content;
-  if (loading) content = <Spinner label="Loading work experience…" />;
-  else if (error) content = <LoadError what="work experience" onRetry={retry} />;
-  else
-    content = (
-      <ol className="space-y-4">
-        {work.map((item, index) => (
-          <li key={`${item.company}-${item.position}-${item.duration ?? index}`}>
-            <WorkExperienceCard {...item} />
-          </li>
-        ))}
-      </ol>
-    );
-
+/** Work history list. `work` comes from the route loader (pre-rendered, refreshed in the browser). */
+function WorkExperiences({ titleAs: Title = "h2", work = [] }) {
   return (
     <section aria-labelledby="work-title">
       <div className="section grid gap-8 lg:grid-cols-3">
@@ -31,7 +11,19 @@ function WorkExperiences({ titleAs: Title = "h2" }) {
             Work Experiences
           </Title>
         </div>
-        <div className="lg:col-span-2">{content}</div>
+        <div className="lg:col-span-2">
+          {work.length ? (
+            <ol className="space-y-4">
+              {work.map((item, index) => (
+                <li key={item.id ?? `${item.company}-${item.position}-${index}`}>
+                  <WorkExperienceCard {...item} />
+                </li>
+              ))}
+            </ol>
+          ) : (
+            <p className="card text-muted">Work history will be listed here soon.</p>
+          )}
+        </div>
       </div>
     </section>
   );

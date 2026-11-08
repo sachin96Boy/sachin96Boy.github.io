@@ -1,12 +1,38 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router";
 import { TbArrowLeft, TbExternalLink } from "react-icons/tb";
-import Spinner from "./item-components/Spinner";
-import LoadError from "./item-components/LoadError";
 import { splitTags } from "./item-components/ProjectCard";
-import { useFirebaseData } from "../../hooks/useFirebaseData";
-import { getProjects } from "../../lib/firebaseData";
 
 const FALLBACK_IMAGE = "/imageAssets/Night-sky-Image.webp";
+
+/**
+ * Project screenshot with a fallback. The page is pre-rendered, so the image can fail before
+ * React hydrates (when `onError` isn't attached yet); the effect catches that case too.
+ */
+function ProjectImage({ src, alt }) {
+  const [current, setCurrent] = useState(src || FALLBACK_IMAGE);
+  const ref = useRef(null);
+  const showFallback = () => setCurrent((c) => (c === FALLBACK_IMAGE ? c : FALLBACK_IMAGE));
+
+  useEffect(() => {
+    setCurrent(src || FALLBACK_IMAGE);
+  }, [src]);
+
+  useEffect(() => {
+    const img = ref.current;
+    if (img && img.complete && img.naturalWidth === 0) showFallback();
+  }, [current]);
+
+  return (
+    <img
+      ref={ref}
+      className="mt-8 h-auto w-full max-w-md rounded-xl border border-line shadow-2xl shadow-black/40"
+      src={current}
+      alt={alt}
+      onError={showFallback}
+    />
+  );
+}
 
 function BackButton() {
   const navigate = useNavigate();
@@ -18,17 +44,10 @@ function BackButton() {
   );
 }
 
-function ProjElements() {
-  const { id } = useParams();
-  const { data, loading, error, retry } = useFirebaseData("projects", getProjects);
-  const project = (data ?? []).find((p) => String(p.id) === id);
-
+/** Project detail. `project` comes from the route loader; null when the id doesn't exist. */
+function ProjElements({ project }) {
   let content;
-  if (loading) {
-    content = <Spinner label="Loading project…" />;
-  } else if (error) {
-    content = <LoadError what="this project" onRetry={retry} />;
-  } else if (!project) {
+  if (!project) {
     content = (
       <div className="card text-center">
         <h1 className="text-2xl font-semibold text-fg">Project not found</h1>
@@ -40,14 +59,7 @@ function ProjElements() {
     content = (
       <article className="flex flex-col items-center text-center">
         <h1 className="section-title">{project.name}</h1>
-        <img
-          className="mt-8 h-auto w-full max-w-md rounded-xl border border-line shadow-2xl shadow-black/40"
-          src={project.imgPath || FALLBACK_IMAGE}
-          alt={`Screenshot of ${project.name}`}
-          onError={(e) => {
-            if (!e.currentTarget.src.endsWith(FALLBACK_IMAGE)) e.currentTarget.src = FALLBACK_IMAGE;
-          }}
-        />
+        <ProjectImage src={project.imgPath} alt={`Screenshot of ${project.name}`} />
         <ul className="mt-6 flex flex-wrap justify-center gap-2">
           {splitTags(project.tags).map((tag) => (
             <li key={tag} className="tag">

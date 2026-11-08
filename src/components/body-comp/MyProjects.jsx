@@ -1,28 +1,19 @@
 import ProjectCard from "./item-components/ProjectCard";
-import Spinner from "./item-components/Spinner";
-import LoadError from "./item-components/LoadError";
-import { useFirebaseData } from "../../hooks/useFirebaseData";
-import { getProjects, getSocial } from "../../lib/firebaseData";
 import illustration from "../../assets/3dimage.webp";
 
-function MyProjects({ titleAs: Title = "h2" }) {
-  const projects = useFirebaseData("projects", getProjects);
-  const { data: social } = useFirebaseData("social", getSocial);
-  const list = projects.data ?? [];
-
-  let content;
-  if (projects.loading) content = <Spinner label="Loading projects…" />;
-  else if (projects.error) content = <LoadError what="projects" onRetry={projects.retry} />;
-  else
-    content = (
-      <ul className="grid grid-cols-1 gap-4 md:grid-cols-2">
-        {list.map((project, index) => (
-          <li key={project.id ?? index}>
-            <ProjectCard {...project} />
-          </li>
-        ))}
-      </ul>
-    );
+/** Project grid. Data comes from the route loader (pre-rendered, refreshed in the browser). */
+function MyProjects({ titleAs: Title = "h2", projects = [], fiverr = null }) {
+  const content = projects.length ? (
+    <ul className="grid grid-cols-1 gap-4 md:grid-cols-2">
+      {projects.map((project, index) => (
+        <li key={project.id ?? index}>
+          <ProjectCard {...project} />
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <p className="card text-muted">Projects will be listed here soon.</p>
+  );
 
   return (
     <section aria-labelledby="projects-title">
@@ -32,7 +23,7 @@ function MyProjects({ titleAs: Title = "h2" }) {
           My Portfolio Projects
         </Title>
 
-        {social?.fiverr && (
+        {fiverr && (
           <div className="card mt-8 flex flex-col items-center gap-6 sm:flex-row">
             <img
               src={illustration}
@@ -45,7 +36,7 @@ function MyProjects({ titleAs: Title = "h2" }) {
             <p className="text-xl text-fg">
               Check out my 3D animation work on{" "}
               <a
-                href={social.fiverr}
+                href={fiverr}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="font-semibold text-accent underline-offset-4 hover:underline"

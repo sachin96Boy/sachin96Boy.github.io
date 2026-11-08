@@ -1,5 +1,5 @@
 import { useEffect, useId, useRef, useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router";
 import { TbMenu2, TbX } from "react-icons/tb";
 import Logo from "./Logo";
 import ProfilePanel from "./profile/ProfilePanel";

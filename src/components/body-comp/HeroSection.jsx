@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import HeroText from "./hero-items/HeroText";
 import AvatarPlaceholder from "../model/AvatarPlaceholder";
 
@@ -6,6 +6,11 @@ import AvatarPlaceholder from "../model/AvatarPlaceholder";
 const SachinBoy = lazy(() => import("../model/SachinBoy"));
 
 function HeroSection() {
+  // The avatar is browser-only: pre-rendered HTML (and hydration) show the placeholder,
+  // then the 3D chunk loads after mount. three.js never runs during pre-rendering.
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
   return (
     <section aria-labelledby="hero-title" className="relative overflow-hidden">
       {/* soft accent glow behind the avatar */}
@@ -16,9 +21,13 @@ function HeroSection() {
       <div className="relative mx-auto grid max-w-6xl items-center gap-2 px-4 pt-10 sm:px-6 lg:min-h-[calc(100svh-4rem)] lg:grid-cols-2 lg:gap-8 lg:px-10 lg:pt-0">
         <HeroText />
         <div className="h-[55svh] min-h-[360px] lg:h-[min(80svh,760px)]">
-          <Suspense fallback={<AvatarPlaceholder />}>
-            <SachinBoy />
-          </Suspense>
+          {mounted ? (
+            <Suspense fallback={<AvatarPlaceholder />}>
+              <SachinBoy />
+            </Suspense>
+          ) : (
+            <AvatarPlaceholder />
+          )}
         </div>
       </div>
 

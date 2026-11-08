@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { profile } from "../data/profile";
 
 function Logo() {

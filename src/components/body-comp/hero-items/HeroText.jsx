@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { TbArrowRight, TbMail } from "react-icons/tb";
 import { mailto, profile } from "../../../data/profile";
 
