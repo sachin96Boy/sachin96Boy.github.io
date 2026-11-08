@@ -1,192 +1,114 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
+import { NavLink, useLocation } from "react-router-dom";
+import { TbMenu2, TbX } from "react-icons/tb";
 import Logo from "./Logo";
-import { BiMenuAltLeft } from "react-icons/bi";
-import {
-  BsDownload,
-  BsFacebook,
-  BsGithub,
-  BsLinkedin,
-  BsTwitter,
-} from "react-icons/bs";
-import { AiOutlineClose } from "react-icons/ai";
-import { getDownloadURL, getStorage, ref } from "firebase/storage";
+import ProfilePanel from "./profile/ProfilePanel";
+import { navigation } from "../data/navigation";
 
-import firebaseApp from "../firebase/firebase";
-import axios from "axios";
-
+/** Sticky mobile top bar with a full-screen menu drawer (hidden on desktop). */
 function Header() {
-  const storage = getStorage(firebaseApp);
+  const [open, setOpen] = useState(false);
+  const menuButtonRef = useRef(null);
+  const drawerId = useId();
+  const { pathname } = useLocation();
 
-  const [isOpenHeader, setIsOpenHeader] = React.useState(false);
-  const [socialDetails, setSocialDetails] = useState();
-  const [loading, setLoading] = useState(true);
-
-  const toggleSidebar = () => {
-    setIsOpenHeader(!isOpenHeader);
-  };
-
+  // Close whenever the route changes.
   useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_DATABASE_URL}social.json`)
-      .then((res) => {
-        setSocialDetails(res.data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-  const pathReference = ref(
-    storage,
-    `${import.meta.env.VITE_STORAGE_BUCKT_URL}/sachinsupunthaka.pdf`
-  );
+    setOpen(false);
+  }, [pathname]);
 
-  const handleDownload = async() => {
-    await getDownloadURL(pathReference)
-      .then((url) => {
-        // This can be downloaded directly:
-        const xhr = new XMLHttpRequest();
-        xhr.responseType = "blob";
-        xhr.onload = (event) => {
-          const blob = xhr.response;
-        };
-        xhr.open("GET", url);
-        xhr.send();
-      })
-      .catch((err) => {
-        console.log(err);
-        switch (err.code) {
-          case "storage/object-not-found":
-            // File doesn't exist
-            break;
-          case "storage/unauthorized":
-            // User doesn't have permission to access the object
-            break;
-          case "storage/canceled":
-            // User canceled the upload
-            break;
+  // While open: Esc closes, and the page behind doesn't scroll.
+  useEffect(() => {
+    if (!open) return undefined;
+    const onKeyDown = (e) => {
+      if (e.key === "Escape") {
+        setOpen(false);
+        menuButtonRef.current?.focus();
+      }
+    };
+    document.addEventListener("keydown", onKeyDown);
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [open]);
 
-          // ...
-
-          case "storage/unknown":
-            // Unknown error occurred, inspect the server response
-            break;
-        }
-      });
+  const close = () => {
+    setOpen(false);
+    menuButtonRef.current?.focus();
   };
 
-  let headerContent = (
-    <div className="flex sticky top-0 flex-row w-full items-center text-2xl px-5 justify-between bg-slate-800 py-3">
-      <BiMenuAltLeft className="text-slate-200" onClick={toggleSidebar} />
-      <Logo />
-    </div>
-  );
-
-  if (isOpenHeader) {
-    headerContent = (
-      <div className="flex flex-col bg-slate-900 w-full z-50 py-3  top-0 bottom-0 fixed overflow-y-scroll overflow-x-hidden">
-        <div className="flex flex-row items-center text-2xl px-5 justify-between">
-          <AiOutlineClose className="text-slate-200" onClick={toggleSidebar} />
-          <Logo />
-        </div>
-        <div className="mx-5">
-          {/* profile picture with an active button */}
-          <div className="flex flex-col items-center justify-between">
-            <div className="inline-flex relative">
-              <div className="absolute bottom-2 right-5 p-2 bg-green-500 rounded-full border-2 border-white"></div>
-              <img
-                className="w-44 h-44 mx-auto rounded-full p-1 border-2 border-slate-700"
-                src="https://i.ibb.co/tM0THCd/My-image.webp"
-                alt="profile"
-              />
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-medium text-white my-2">
-                Sachin Supunthaka
-              </div>
-              <div className="text-sm font-medium text-slate-400">
-                Full Stack Web and Mobile App Developer
-              </div>
-              <div className="text-sm font-medium text-slate-400">
-                Freelance 3D Animator
-              </div>
-            </div>
-          </div>
-          {/* list of social media set */}
-          {loading ? (
-            <Spinner />
-          ) : (
-            <div className="flex flex-row justify-center mt-5">
-              <a href={socialDetails.facebook} type="button">
-                <BsFacebook className="w-6 h-6 mr-3 text-slate-400 hover:text-slate-100" />
-              </a>
-              <a href={socialDetails.linkdin}>
-                <BsLinkedin className="w-6 h-6 mr-3 text-slate-400 hover:text-slate-100" />
-              </a>
-              <a href={socialDetails.twitter}>
-                <BsTwitter className="w-6 h-6 mr-3 text-slate-400 hover:text-slate-100" />
-              </a>
-              <a href={socialDetails.github}>
-                <BsGithub className="w-6 h-6 mr-3 text-slate-400 hover:text-slate-100" />
-              </a>
-            </div>
-          )}
-          {/* personal info section */}
-          <div className="flex flex-col mt-5">
-            <div className="flex flex-row items-center py-2 px-4 rounded-lg text-slate-100 bg-slate-800">
-              <div className="flex flex-col">
-                <div className="text-md font-medium my-1">Education</div>
-                <div className="text-sm font-medium text-slate-400">
-                  BSc in Computer Science
-                </div>
-                <div className="text-xs font-medium text-slate-400">
-                  Wayamba University of Sri Lanka
-                </div>
-                <div className="text-md font-medium my-1">Country</div>
-                <div className="text-sm font-medium text-slate-400">
-                  Sri Lanka
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* sidebar menu */}
-          <div className="flex flex-col mt-5">
-            <div className="flex flex-row items-center py-2 px-4 rounded-lg text-slate-100 bg-slate-800">
-              {/* language profiency ith progressBar */}
-              <div className="flex flex-col">
-                <div className="text-md font-medium my-1">
-                  Language Profiency
-                </div>
-                <div className="text-sm font-medium text-slate-400">
-                  English
-                </div>
-                <div className="text-sm font-medium text-slate-400">
-                  Sinhala
-                </div>
-              </div>
-            </div>
-          </div>
-          {/* download cv button */}
-          <div className="flex flex-col mt-5">
-            <div className="flex flex-col">
-              <button
-                onClick={handleDownload}
-                className="bg-slate-800 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded border border-dotted border-white"
-              >
-                <div className="flex flex-row items-center justify-between">
-                  Download CV
-                  <BsDownload className="w-6 h-6 mr-3 text-slate-400 hover:text-slate-100" />
-                </div>
-              </button>
-            </div>
-          </div>
-        </div>
+  return (
+    <header className="sticky top-0 z-40 lg:hidden">
+      <div className="flex h-14 items-center justify-between border-b border-line bg-surface/90 px-2 backdrop-blur">
+        <button
+          ref={menuButtonRef}
+          type="button"
+          aria-label="Open menu"
+          aria-expanded={open}
+          aria-controls={drawerId}
+          onClick={() => setOpen(true)}
+          className="icon-link"
+        >
+          <TbMenu2 aria-hidden="true" className="h-6 w-6" />
+        </button>
+        <Logo />
+        <span className="w-11" aria-hidden="true" />
       </div>
-    );
-  }
 
-  return headerContent;
+      {open && (
+        <div
+          id={drawerId}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Menu"
+          className="fixed inset-0 z-50 overflow-y-auto bg-bg"
+        >
+          <div className="flex h-14 items-center justify-between border-b border-line px-2">
+            <button
+              type="button"
+              aria-label="Close menu"
+              onClick={close}
+              className="icon-link"
+              autoFocus
+            >
+              <TbX aria-hidden="true" className="h-6 w-6" />
+            </button>
+            <Logo />
+            <span className="w-11" aria-hidden="true" />
+          </div>
+
+          <nav aria-label="Primary" className="px-4 pt-4">
+            <ul className="grid gap-1">
+              {navigation.map(({ to, label, icon: Icon, end }) => (
+                <li key={to}>
+                  <NavLink
+                    to={to}
+                    end={end}
+                    onClick={() => setOpen(false)}
+                    className={({ isActive }) =>
+                      `flex min-h-[48px] items-center gap-3 rounded-lg px-3 text-base font-medium transition-colors duration-200 ${
+                        isActive ? "bg-surface-2 text-accent" : "text-fg hover:bg-surface"
+                      }`
+                    }
+                  >
+                    <Icon aria-hidden="true" className="h-5 w-5" />
+                    {label}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <div className="px-4 py-8">
+            <ProfilePanel compact />
+          </div>
+        </div>
+      )}
+    </header>
+  );
 }
 
 export default Header;

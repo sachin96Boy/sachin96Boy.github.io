@@ -6,20 +6,45 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+firebase-debug.log*
+firebase-debug.*.log*
 
+# Dependencies
 node_modules
+
+# Build output
 dist
 dist-ssr
 *.local
+
+# Caches & test coverage
+.eslintcache
+.cache
+coverage
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Deployment
+.vercel
+.firebase/
+
+# Claude Code (local skills & settings)
+.claude/
 
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
 .idea
-.DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
-.env
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini

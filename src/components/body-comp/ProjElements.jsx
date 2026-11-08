@@ -1,103 +1,81 @@
-import axios from "axios";
-import React from "react";
-import { useState } from "react";
-import { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router-dom";
+import { TbArrowLeft, TbExternalLink } from "react-icons/tb";
 import Spinner from "./item-components/Spinner";
-import { Button, Chip } from "@material-tailwind/react";
-import { AiOutlineArrowLeft } from "react-icons/ai";
+import LoadError from "./item-components/LoadError";
+import { splitTags } from "./item-components/ProjectCard";
+import { useFirebaseJson } from "../../hooks/useFirebaseJson";
 
-function ProjElements(props) {
-  const location = useLocation();
+const FALLBACK_IMAGE = "/imageAssets/Night-sky-Image.webp";
+
+function BackButton() {
   const navigate = useNavigate();
-  const projId = location.pathname.split("/project/")[1];
+  return (
+    <button type="button" onClick={() => navigate("/portfolio")} className="btn-secondary">
+      <TbArrowLeft aria-hidden="true" className="h-5 w-5" />
+      Back to portfolio
+    </button>
+  );
+}
 
-  const [project, setProject] = useState();
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_DATABASE_URL}Projects.json`)
-      .then((res) => {
-        setProject(res.data.find((project) => project.id === projId));
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+function ProjElements() {
+  const { id } = useParams();
+  const { data, loading, error, retry } = useFirebaseJson("Projects", { expect: "array" });
+  const project = (data ?? []).filter(Boolean).find((p) => String(p.id) === id);
 
-  const visitHandler = () => {
-    window.open(project.Refference);
-  };
-
-  const handleBack = () => {
-    navigate("/portfolio");
-  };
-
-  let ProjContent = <Spinner />;
-  let projImgPath = "../../imageAssets/Night-sky-Image.webp";
-
-  if (project && !loading) {
-    ProjContent = (
-      <>
-        <div
-          onClick={handleBack}
-          className="flex items-center justify-center lg:justify-start m-4 py-2 font-bold cursor-pointer text-slate-200"
-        >
-          <AiOutlineArrowLeft className="text-slate-50 text-xl mx-2" />
-          <h2 className="font-black text-center text-xl">Go Back</h2>
-        </div>
-        <div className="flex flex-col items-center  justify-center my-4 h-full md:min-h-screen">
-          <div className="flex my-2">
-            <h1 className="font-bold text-slate-200 text-xl">{project.name}</h1>
-          </div>
-          <div>
-            <img
-              className="h-auto max-w-xs lg:max-w-md rounded-lg shadow-xl shadow-gray-800"
-              src={project.imgPath ? project.imgPath : projImgPath}
-              alt={project.name}
-            />
-          </div>
-          <div className="flex flex-col md:flex-row my-4">
-            {project.tags.split(",").map((tag, index) => (
-              <Chip
-                key={index}
-                className="my-2 mx-4 border-2 border-slate-400 text-slate-900 bg-slate-300"
-                value={tag}
-              />
-            ))}
-          </div>
-          <div className="mx-4 my-4">
-            <p className="text-lg text-center text-slate-300">
-              {project.description}
-            </p>
-          </div>
-          <div className="my-4">
-            <Button color="amber" onClick={visitHandler}>
-              Visit Project
-            </Button>
-          </div>
-        </div>
-      </>
-    );
-  }
-
-  if (project === undefined && !loading) {
-    ProjContent = (
-      <div className="w-full my-12 flex flex-col items-center text-slate-200 h-screen">
-        <h1 className="text-3xl text-center">Item Not Found</h1>
-        <div
-          onClick={handleBack}
-          className="flex items-center justify-center lg:justify-start m-4 py-2 font-bold cursor-pointer text-slate-200"
-        >
-          <AiOutlineArrowLeft className="text-slate-50 text-xl mx-2" />
-          <h2 className="font-black text-center text-xl">Go Back</h2>
-        </div>
+  let content;
+  if (loading) {
+    content = <Spinner label="Loading project…" />;
+  } else if (error) {
+    content = <LoadError what="this project" onRetry={retry} />;
+  } else if (!project) {
+    content = (
+      <div className="card text-center">
+        <h1 className="text-2xl font-semibold text-fg">Project not found</h1>
+        <p className="mt-2 text-muted">It may have been moved or removed.</p>
       </div>
     );
+  } else {
+    // "Refference" is the field name used in the database.
+    const link = project.Refference;
+    content = (
+      <article className="flex flex-col items-center text-center">
+        <h1 className="section-title">{project.name}</h1>
+        <img
+          className="mt-8 h-auto w-full max-w-md rounded-xl border border-line shadow-2xl shadow-black/40"
+          src={project.imgPath || FALLBACK_IMAGE}
+          alt={`Screenshot of ${project.name}`}
+          onError={(e) => {
+            if (!e.currentTarget.src.endsWith(FALLBACK_IMAGE)) e.currentTarget.src = FALLBACK_IMAGE;
+          }}
+        />
+        <ul className="mt-6 flex flex-wrap justify-center gap-2">
+          {splitTags(project.tags).map((tag) => (
+            <li key={tag} className="tag">
+              {tag}
+            </li>
+          ))}
+        </ul>
+        {project.description && (
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">{project.description}</p>
+        )}
+        {link && (
+          <a href={link} target="_blank" rel="noopener noreferrer" className="btn-primary mt-8">
+            Visit project
+            <TbExternalLink aria-hidden="true" className="h-5 w-5" />
+          </a>
+        )}
+      </article>
+    );
   }
 
-  return <div className="min-h-screen">{ProjContent}</div>;
+  return (
+    <div className="section">
+      <div className="mb-8">
+        <BackButton />
+      </div>
+      {content}
+    </div>
+  );
 }
 
 export default ProjElements;

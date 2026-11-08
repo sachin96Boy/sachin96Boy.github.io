@@ -1,46 +1,48 @@
-import { Navigate, Route, Routes } from "react-router";
-import { useState } from "react";
+import { Route, Routes } from "react-router-dom";
 
 import VerticleHeader from "./components/header/VerticleHeader";
 import Sidebar from "./components/sidebar/Sidebar";
+import Header from "./components/Header";
+import Footer from "./components/footer/Footer";
+import ScrollToTop from "./components/ScrollToTop";
 import HomePage from "./components/pages/HomePage";
 import Services from "./components/pages/Services";
 import WorkHistory from "./components/pages/WorkHistory";
 import Contact from "./components/pages/Contact";
 import PortFolio from "./components/pages/PortFolio";
-import Header from "./components/Header";
+import NotFoundPage from "./components/body-comp/NotFoundPage";
 
 function App() {
-  const [isDark, setIsDark] = useState(false);
-
   return (
-    <div className="flex flex-col lg:flex-row font-roboto">
-      <div
-        className={
-          isDark
-            ? "fixed  z-50 overflow-auto bg-slate-900"
-            : "fixed  z-50 overflow-auto bg-slate-900"
-        }
+    <>
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-accent focus:px-4 focus:py-2 focus:font-semibold focus:text-on-accent"
       >
-        <Sidebar isDark={isDark} setIsDark={setIsDark} />
-      </div>
-      <div className="flex w-full lg:hidden">
-        <Header />
-      </div>
-      <div className="flex flex-1">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/portfolio/*" element={<PortFolio />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/workhistory" element={<WorkHistory />} />
-          <Route path="*" element={<Navigate to={"/"} replace />} />
-        </Routes>
-      </div>
-      <div className="right-0 fixed  z-50">
-        <VerticleHeader />
-      </div>
-    </div>
+        Skip to content
+      </a>
+      <ScrollToTop />
+      <Sidebar />
+      <Header />
+      <main
+        id="main"
+        tabIndex={-1}
+        className="flex min-h-[100dvh] flex-col focus-visible:ring-0 lg:pl-64 lg:pr-20"
+      >
+        <div className="flex-1">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/portfolio/*" element={<PortFolio />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/workhistory" element={<WorkHistory />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </div>
+        <Footer />
+      </main>
+      <VerticleHeader />
+    </>
   );
 }
 

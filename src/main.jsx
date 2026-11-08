@@ -1,17 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import { Analytics } from "@vercel/analytics/react";
 import App from "./App";
 import "./index.css";
-import { BrowserRouter } from "react-router-dom";
-import { ThemeProvider } from "@material-tailwind/react";
-
-import { Analytics } from '@vercel/analytics/react';
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <ThemeProvider>
+  <React.StrictMode>
     <BrowserRouter>
       <App />
-      <Analytics mode="production"/>
+      <Analytics mode="production" />
     </BrowserRouter>
-  </ThemeProvider>
+  </React.StrictMode>
 );

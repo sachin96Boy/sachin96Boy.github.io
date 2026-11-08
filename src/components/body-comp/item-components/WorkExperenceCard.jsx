@@ -1,23 +1,25 @@
-import { Typography } from "@material-tailwind/react";
-import React from "react";
-import { IoPeople } from "react-icons/io5";
+import { TbBriefcase, TbCalendar } from "react-icons/tb";
 
-function WorkExperenceCard(props) {
-  const { company, position, duration, description } = props;
+function WorkExperenceCard({ company, position, duration, description }) {
   return (
-    <div className="items-start text-start p-4">
-      <h1 className="text-xl font-black text-slate-800 my-2">
-        <span className="text-blue-slate-500">
-          <IoPeople />
-        </span>
-        {company}
-      </h1>
-      <div className="flex justify-between">
-        <h1 className="text-lg font-bold text-slate-100">{position}</h1>
-        <h1 className="text-lg font-bold text-slate-700">{duration}</h1>
+    <article className="card">
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <h3 className="text-lg font-semibold text-fg">{position}</h3>
+          <p className="mt-1 flex items-center gap-2 text-accent">
+            <TbBriefcase aria-hidden="true" className="h-4 w-4 shrink-0" />
+            {company}
+          </p>
+        </div>
+        {duration && (
+          <p className="tag shrink-0 gap-1.5 self-start">
+            <TbCalendar aria-hidden="true" className="h-3.5 w-3.5" />
+            {duration}
+          </p>
+        )}
       </div>
-      <Typography className="text-lg text-slate-300">{description}</Typography>
-    </div>
+      {description && <p className="mt-4 leading-relaxed text-muted">{description}</p>}
+    </article>
   );
 }
 
