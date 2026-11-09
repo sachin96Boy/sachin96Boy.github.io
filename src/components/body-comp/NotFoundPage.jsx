@@ -1,24 +1,18 @@
-import { Button } from '@material-tailwind/react'
-import React from 'react'
-import { useNavigate } from 'react-router'
+import { Link } from "react-router";
+import { TbHome } from "react-icons/tb";
 
 function NotFoundPage() {
-    const navigator = useNavigate();
-    const handleClick = ()=>{
-        navigator("/");
-    }
   return (
-    <div className='w-full bg-blue-slate-900'>
-        <div className='items-center flex flex-col gap-5'>
-            <h1>
-                This Web Page Not avaiable
-            </h1>
-            <Button onClick={handleClick}>
-                Back to Home
-            </Button>
-        </div>
-    </div>
-  )
+    <section className="section flex min-h-[60vh] flex-col items-center justify-center text-center">
+      <p className="eyebrow">404</p>
+      <h1 className="section-title mt-2">Page not found</h1>
+      <p className="mt-3 text-muted">The page you’re looking for doesn’t exist or has moved.</p>
+      <Link to="/" className="btn-primary mt-8">
+        <TbHome aria-hidden="true" className="h-5 w-5" />
+        Back to home
+      </Link>
+    </section>
+  );
 }
 
-export default NotFoundPage
+export default NotFoundPage;

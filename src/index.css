@@ -1,5 +1,101 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+@import 'tailwindcss';
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@theme {
+  --color-bg: #020617;
+  --color-surface: #0f172a;
+  --color-surface-2: #1e293b;
+  --color-line: #334155;
+  --color-fg: #f8fafc;
+  --color-muted: #94a3b8;
+
+  --color-accent: #22c55e;
+  --color-accent-hover: #4ade80;
+  --color-accent-soft: #86efac;
+
+  --color-on-accent: #052e16;
+
+  --font-sans: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+}
+
+/*
+  Tailwind v4 defaults borders to `currentcolor`; default them to the design
+  token instead so a bare `border` matches the rest of the UI.
+  v4 preflight also no longer gives buttons a pointer cursor.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-line, currentcolor);
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+@utility section {
+  @apply mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 lg:px-10 lg:py-20;
+}
+
+@utility section-title {
+  @apply text-3xl font-semibold tracking-tight text-fg sm:text-4xl;
+}
+
+@utility eyebrow {
+  @apply font-mono text-sm font-medium uppercase tracking-widest text-accent;
+}
+
+@utility btn {
+  @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-lg px-5 py-2.5 text-base font-semibold transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-50;
+}
+
+@utility btn-primary {
+  @apply btn bg-accent text-on-accent hover:bg-accent-hover;
+}
+
+@utility btn-secondary {
+  @apply btn border border-line text-fg hover:border-muted hover:bg-surface-2;
+}
+
+@utility card {
+  @apply rounded-xl border border-line bg-surface p-6;
+}
+
+@utility tag {
+  @apply inline-flex items-center rounded-md border border-line bg-surface-2 px-2 py-0.5 font-mono text-xs text-muted;
+}
+
+@utility icon-link {
+  @apply inline-flex h-11 w-11 items-center justify-center rounded-full text-muted transition-colors duration-200 hover:bg-surface-2 hover:text-fg;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-bg font-sans text-fg antialiased;
+  }
+
+  :focus-visible {
+    @apply outline-hidden ring-2 ring-accent ring-offset-2 ring-offset-bg;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      scroll-behavior: auto !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}

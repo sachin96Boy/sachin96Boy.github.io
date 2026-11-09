@@ -1,13 +1,16 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
+import { profile } from "../data/profile";
 
 function Logo() {
   return (
-    <div>
-      <Link to={"/"}>
-        <div className="text-slate-200 font-bold text-center">Sachin96Boy</div>
-      </Link>
-    </div>
+    <Link
+      to="/"
+      aria-label={`${profile.handle}, home`}
+      className="rounded-sm font-mono text-base font-semibold text-fg"
+    >
+      {profile.handle}
+      <span className="text-accent">.</span>
+    </Link>
   );
 }
 

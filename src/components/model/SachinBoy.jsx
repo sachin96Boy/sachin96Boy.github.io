@@ -1,125 +1,95 @@
-import React, { useCallback } from "react";
-import * as THREE from "three";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import Model from "./Model";
+import { useEffect, useRef, useState } from "react";
+import { TbHandStop } from "react-icons/tb";
+import { createAvatarScene } from "./avatarScene";
+import AvatarPlaceholder from "./AvatarPlaceholder";
+import profilePic from "../../assets/gg-email.webp";
+import { profile } from "../../data/profile";
 
+// Fade the legs out at the bottom of the frame instead of a hard cut.
+const FADE_MASK = {
+  maskImage: "linear-gradient(to bottom, #000 72%, transparent 98%)",
+  WebkitMaskImage: "linear-gradient(to bottom, #000 72%, transparent 98%)",
+};
+
+/**
+ * Animated 3D avatar. Loaded lazily from HeroSection so three.js ships in its own chunk.
+ * Waves on load, idles, waves (or stretches) now and then; click/tap or "Say hi" cycles
+ * wave → shrug → stretch.
+ */
 function SachinBoy() {
-  const refContainer = React.useRef(null);
-  const [loading, setLoading] = React.useState(true);
-  const [renderer, setRenderer] = React.useState(null);
-  const [camera, setCamera] = React.useState(null);
-  const [controls, setControls] = React.useState(null);
-  const [target] = React.useState(new THREE.Vector3(0, 0, 0));
-  const [initialCameraPosition] = React.useState(new THREE.Vector3(0, 0, 3));
-  const [scene] = React.useState(new THREE.Scene());
+  const containerRef = useRef(null);
+  const sceneRef = useRef(null);
+  const [status, setStatus] = useState("loading"); // loading | ready | error
 
-  const handleWindowResize = useCallback(() => {
-    if (camera === null || renderer === null) return;
-    const width = refContainer.current.clientWidth;
-    const height = refContainer.current.clientHeight;
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return undefined;
+    const reducedMotion =
+      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
 
-    camera.aspect = width / height;
-    camera.updateProjectionMatrix();
-
-    renderer.setSize(width, height);
-    renderer.setPixelRatio(window.devicePixelRatio);
-  }, [renderer]);
-
-  const handlemousemove = useCallback(
-    (e) => {
-      if (camera === null) return;
-      const mouse = new THREE.Vector2();
-      mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
-      mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
-      const raycaster = new THREE.Raycaster();
-      raycaster.setFromCamera(mouse, camera);
-      // const intersects = raycaster.intersectObjects(scene.children, true);
-      // if (intersects.length > 0) {
-      //   console.log(intersects[0].object.name);
-      // }
-      controls.update();
-    },
-    [camera, scene]
-  );
-
-  React.useEffect(() => {
-    const width = refContainer.current.clientWidth;
-    const height = refContainer.current.clientHeight;
-
-    const renderer = new THREE.WebGLRenderer({
-      antialias: true,
-      alpha: true,
-    });
-    const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
-
-    renderer.setSize(width, height);
-    renderer.setPixelRatio(window.devicePixelRatio);
-
-    refContainer.current.appendChild(renderer.domElement);
-
-    camera.position.copy(initialCameraPosition);
-    camera.lookAt(target);
-    const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true;
-
-    controls.update();
-
-    setRenderer(renderer);
-    setCamera(camera);
-    setControls(controls);
-
-    const light = new THREE.AmbientLight(0xffffff, 0.7);
-    scene.add(light);
-
-    Model({
-      scene,
-      glbpath: "/3delems/sachin96Boy.glb",
-      options: {
-        receiveShadow: true,
-        castShadow: true,
-        scale: 3,
-        position: [0, -4, 0],
-        rotation: [0, -0.4, 0],
-      },
-    })
-      .then(() => {
-        renderer.render(scene, camera);
-        setLoading(false);
-        renderer.dispose();
-        controls.dispose();
-      })
-      .catch((err) => {
-        console.log(err);
+    let avatar;
+    try {
+      avatar = createAvatarScene(container, {
+        reducedMotion,
+        onLoaded: () => setStatus("ready"),
+        onError: (err) => {
+          console.error("3D avatar failed to load", err);
+          setStatus("error");
+        },
       });
+    } catch (err) {
+      // WebGL unavailable (old device, disabled GPU, etc.)
+      console.error("3D avatar unavailable", err);
+      setStatus("error");
+      return undefined;
+    }
+    sceneRef.current = avatar;
+    return () => {
+      avatar.dispose();
+      sceneRef.current = null;
+    };
   }, []);
 
-  React.useEffect(() => {
-    window.addEventListener("resize", handleWindowResize);
-    window.addEventListener("mousemove", (e) => {
-      handlemousemove(e);
-    });
-    return () => {
-      window.removeEventListener("resize", handleWindowResize);
-      window.removeEventListener("mousemove", (e) => {
-        handlemousemove(e);
-      });
-    };
-  }, [renderer, handleWindowResize]);
-
   return (
-    <div
-      ref={refContainer}
-      className="m-auto h-screen overflow-hidden"
-    >
-      <div className="top-0 left-0 w-full">
-        {loading && (
-          <div className="absolute top-0 left-0 w-full h-full bg-slate-700 flex justify-center items-center">
-            <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900">
-              <div className="animate-ping rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900"></div>
-            </div>
-          </div>
-        )}
-      </div>
+    <div className="relative h-full w-full">
+      <div
+        ref={containerRef}
+        role="img"
+        aria-label={`3D avatar of ${profile.name}`}
+        style={FADE_MASK}
+        className={`absolute inset-0 ${status === "ready" ? "cursor-pointer" : ""} ${
+          status === "error" ? "hidden" : ""
+        }`}
+      />
+
+      {status === "loading" && (
+        <div className="absolute inset-0">
+          <AvatarPlaceholder />
+        </div>
+      )}
+
+      {status === "error" && (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <img
+            src={profilePic}
+            width="320"
+            height="320"
+            alt={`Portrait of ${profile.name}`}
+            className="h-auto w-3/5 max-w-xs rounded-full"
+          />
+        </div>
+      )}
+
+      {status === "ready" && (
+        <button
+          type="button"
+          onClick={() => sceneRef.current?.playNextGesture()}
+          className="btn absolute bottom-4 left-1/2 -translate-x-1/2 border border-line bg-surface/80 text-sm text-fg backdrop-blur-sm hover:border-accent hover:text-accent"
+        >
+          <TbHandStop aria-hidden="true" className="h-5 w-5" />
+          Say hi
+        </button>
+      )}
     </div>
   );
 }
