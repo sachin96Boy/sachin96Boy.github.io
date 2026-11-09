@@ -1,11 +1,9 @@
-import React from "react";
-
-function Spinner() {
+function Spinner({ label = "Loading…" }) {
   return (
-    <div className="flex items-center justify-center" role="status">
+    <div className="flex items-center justify-center py-8" role="status">
       <svg
         aria-hidden="true"
-        className="w-8 h-8 mr-2 text-slate-200 animate-spin dark:text-slate-600 fill-blue-600"
+        className="h-8 w-8 animate-spin fill-accent text-surface-2"
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -19,7 +17,7 @@ function Spinner() {
           fill="currentFill"
         />
       </svg>
-      <span className="sr-only">Loading...</span>
+      <span className="sr-only">{label}</span>
     </div>
   );
 }

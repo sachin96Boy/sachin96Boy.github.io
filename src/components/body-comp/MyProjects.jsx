@@ -1,73 +1,56 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
 import ProjectCard from "./item-components/ProjectCard";
-import Spinner from "./item-components/Spinner";
-import axios from "axios";
+import illustration from "../../assets/3dimage.webp";
 
-import MyImage from "../../assets/3dimage.webp";
-
-function MyProjects() {
-  const [projects, setProjects] = useState();
-  const [social, setSocial] = useState();
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    axios
-      .all([
-        axios.get(`${import.meta.env.VITE_DATABASE_URL}Projects.json`),
-        axios.get(`${import.meta.env.VITE_DATABASE_URL}social.json`),
-      ])
-      .then(
-        axios.spread((res1, res2) => {
-          setProjects(res1.data);
-          setSocial(res2.data);
-          setLoading(false);
-        })
-      )
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
-  let projectExperience = <Spinner />;
-
-  if (!loading) {
-    projectExperience = projects.map((project, index) => {
-      return <ProjectCard key={index} {...project} />;
-    });
-  }
+/** Project grid. Data comes from the route loader (pre-rendered, refreshed in the browser). */
+function MyProjects({ titleAs: Title = "h2", projects = [], fiverr = null }) {
+  const content = projects.length ? (
+    <ul className="grid grid-cols-1 gap-4 md:grid-cols-2">
+      {projects.map((project, index) => (
+        <li key={project.id ?? index}>
+          <ProjectCard {...project} />
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <p className="card text-muted">Projects will be listed here soon.</p>
+  );
 
   return (
-    <div className="flex flex-col w-full items-center min-h-screen">
-      <div className="pt-4">
-        <h1 className="text-3xl font-black text-slate-300">
+    <section aria-labelledby="projects-title">
+      <div className="section">
+        <p className="eyebrow">Portfolio</p>
+        <Title id="projects-title" className="section-title mt-2">
           My Portfolio Projects
-        </h1>
-      </div>
-      {!loading && (
-        <>
-          <div className="text-2xl text-slate-300 text-center">
-            Check out my 3D Animation Works on{" "}
-            <a href={social?.fiverr}>
-              <span className="text-green-500 relative font-black text-3xl">
-                Fiverr
-              </span>
-            </a>
-          </div>
-          <div className="right-10 bottom-0">
+        </Title>
+
+        {fiverr && (
+          <div className="card mt-8 flex flex-col items-center gap-6 sm:flex-row">
             <img
-              src={MyImage}
-              alt="img-blur-shadow"
-              className="h-full w-full"
+              src={illustration}
+              alt=""
+              width="256"
+              height="309"
+              loading="lazy"
+              className="h-40 w-auto"
             />
+            <p className="text-xl text-fg">
+              Check out my 3D animation work on{" "}
+              <a
+                href={fiverr}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-accent underline-offset-4 hover:underline"
+              >
+                Fiverr
+              </a>
+              .
+            </p>
           </div>
-        </>
-      )}
-      <div className="grid grid-cols-1 gap-3 md:grid-cols-2 items-center mx-4">
-        {projectExperience}
+        )}
+
+        <div className="mt-10">{content}</div>
       </div>
-      <img></img>
-    </div>
+    </section>
   );
 }
 

@@ -1,27 +1,33 @@
-import { Button } from "@material-tailwind/react";
-import React from "react";
+import { TbMail } from "react-icons/tb";
+import { mailto, profile } from "../../data/profile";
+import SocialLinks from "../profile/SocialLinks";
 
-function ContactMe() {
+function ContactMe({ titleAs: Title = "h2" }) {
   return (
-    <div className="bg-contactbg bg-cover w-full h-full flex items-center justify-center">
-      <div className="flex flex-col w-full items-center justify-center bg-slate-200/50 backdrop-blur-sm py-12">
-        <div className="text-center  text-slate-700 font-black  p-2">
-          <h1 className="font-bold text-4xl">Love to hear from you</h1>
-          <h2 className="font-bold text-2xl">Let's Get in Touch 👋</h2>
-        </div>
-        <Button
-          className="px-16 text-lg font-bold my-2 text-slate-200 outline-2"
-          variant="gradient"
-          ripple={true}
-          color="blue-gray"
-          onClick={()=>{
-            window.location = 'mailto:sachinsupunthaka96@gmail.com'
-          }}
+    <section aria-labelledby="contact-title" className="relative isolate overflow-hidden">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(50%_70%_at_50%_100%,rgba(34,197,94,0.12),transparent_70%)]"
+      />
+      <div className="section flex min-h-[50vh] flex-col items-center justify-center text-center">
+        <p className="eyebrow">Contact</p>
+        <Title id="contact-title" className="section-title mt-2">
+          Love to hear from you
+        </Title>
+        <p className="mt-3 text-xl text-muted">Let’s get in touch.</p>
+        <a href={mailto} className="btn-primary mt-8 px-8">
+          <TbMail aria-hidden="true" className="h-5 w-5" />
+          Email me
+        </a>
+        <a
+          href={mailto}
+          className="mt-4 break-all font-mono text-sm text-muted underline-offset-4 hover:text-fg hover:underline"
         >
-          contact
-        </Button>
+          {profile.email}
+        </a>
+        <SocialLinks className="mt-6 justify-center" />
       </div>
-    </div>
+    </section>
   );
 }
 
