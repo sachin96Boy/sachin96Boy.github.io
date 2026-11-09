@@ -8,9 +8,17 @@
  * Dry run (default, read-only):
  *   npm run migrate:db
  *
- * Apply (one atomic multi-path PATCH), authenticated with either:
- *   GOOGLE_APPLICATION_CREDENTIALS=path/to/service-account.json npm run migrate:db -- --apply
- *   FIREBASE_DB_SECRET=<legacy database secret>                 npm run migrate:db -- --apply
+ * Check credentials (read-only, authenticated):
+ *   npm run migrate:db -- --check
+ *
+ * Apply (one atomic multi-path PATCH):
+ *   npm run migrate:db -- --apply
+ *
+ * Credentials, first match wins (put them in .env or the shell, never in a VITE_* variable,
+ * which Vite treats as public):
+ *   FIREBASE_SERVICE_ACCOUNT_BASE64   base64-encoded service-account JSON
+ *   GOOGLE_APPLICATION_CREDENTIALS    path to the service-account JSON file
+ *   FIREBASE_DB_SECRET                legacy database secret
  *
  * The site reads both the old and new names (src/lib/firebaseData.js), so it keeps working
  * before, during and after the migration. Items that already have the new key are skipped.
@@ -20,6 +28,7 @@ import fs from "node:fs";
 import crypto from "node:crypto";
 
 const APPLY = process.argv.includes("--apply");
+const CHECK = process.argv.includes("--check");
 
 if (fs.existsSync(".env")) process.loadEnvFile(".env");
 const rawUrl = process.env.VITE_DATABASE_URL;
@@ -76,17 +85,54 @@ async function plan() {
   return { changes, updates, skipped };
 }
 
-/** Returns the query parameter used to authenticate the REST write. */
-async function authParam() {
-  if (process.env.FIREBASE_DB_SECRET) return ["auth", process.env.FIREBASE_DB_SECRET];
+/** Parses a service account given as base64 (or base64url / raw) JSON. */
+function decodeServiceAccount(raw) {
+  const text = raw.trim();
+  const parsers = [
+    () => JSON.parse(Buffer.from(text, "base64").toString("utf8")),
+    () => JSON.parse(text),
+    () => JSON.parse(decodeURIComponent(text)),
+  ];
+  for (const parse of parsers) {
+    try {
+      const sa = parse();
+      if (sa && sa.client_email && sa.private_key) return sa;
+    } catch {
+      // try the next encoding
+    }
+  }
+  throw new Error(
+    "FIREBASE_SERVICE_ACCOUNT_BASE64 is not a base64-encoded service-account JSON " +
+      "(expected fields client_email and private_key)."
+  );
+}
 
-  const file = process.env.GOOGLE_APPLICATION_CREDENTIALS;
-  if (!file) {
+function loadServiceAccount() {
+  let sa = null;
+  if (process.env.FIREBASE_SERVICE_ACCOUNT_BASE64) {
+    sa = decodeServiceAccount(process.env.FIREBASE_SERVICE_ACCOUNT_BASE64);
+  } else if (process.env.GOOGLE_APPLICATION_CREDENTIALS) {
+    sa = JSON.parse(fs.readFileSync(process.env.GOOGLE_APPLICATION_CREDENTIALS, "utf8"));
+  }
+  if (sa) sa.private_key = sa.private_key.replace(/\\n/g, "\n"); // tolerate double-escaped keys
+  return sa;
+}
+
+/** Returns the query parameter used to authenticate REST requests. */
+async function authParam() {
+  if (process.env.VITE_ENCODED_SERVICE_ACCOUNT_KEY) {
     throw new Error(
-      "To apply, set GOOGLE_APPLICATION_CREDENTIALS (service-account JSON file) or FIREBASE_DB_SECRET."
+      "Rename VITE_ENCODED_SERVICE_ACCOUNT_KEY to FIREBASE_SERVICE_ACCOUNT_BASE64: VITE_* variables are public."
     );
   }
-  const sa = JSON.parse(fs.readFileSync(file, "utf8"));
+  const sa = loadServiceAccount();
+  if (!sa) {
+    if (process.env.FIREBASE_DB_SECRET) return ["auth", process.env.FIREBASE_DB_SECRET];
+    throw new Error(
+      "No credentials: set FIREBASE_SERVICE_ACCOUNT_BASE64, GOOGLE_APPLICATION_CREDENTIALS or FIREBASE_DB_SECRET."
+    );
+  }
+  console.log(`Credentials: service account for project "${sa.project_id ?? "unknown"}"`);
   const tokenUri = sa.token_uri ?? "https://oauth2.googleapis.com/token";
   const now = Math.floor(Date.now() / 1000);
   const b64 = (obj) => Buffer.from(JSON.stringify(obj)).toString("base64url");
@@ -112,7 +158,21 @@ async function authParam() {
   return ["access_token", token];
 }
 
+/** Read-only authenticated request: the rules endpoint is only readable with admin access. */
+async function checkCredentials() {
+  const [param, value] = await authParam();
+  const res = await fetch(`${DB}.settings/rules.json?${param}=${encodeURIComponent(value)}`);
+  if (!res.ok) throw new Error(`Authenticated read failed (${res.status}); the credentials lack admin access.`);
+  console.log(`Authenticated read OK (${res.status}): the credentials have admin access. Nothing was written.`);
+}
+
 async function main() {
+  if (CHECK) {
+    console.log(`Database: ${new URL(DB).host}`);
+    await checkCredentials();
+    return;
+  }
+
   const { changes, updates, skipped } = await plan();
 
   console.log(`Database: ${new URL(DB).host}`);

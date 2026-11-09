@@ -7,9 +7,20 @@
  *   social.linkdin        -> linkedin    (see scripts/migrate-db-fields.mjs)
  */
 
+function viteDatabaseUrl() {
+  try {
+    // Vite replaces exactly this member expression with the value at build time. Never use
+    // `import.meta.env` on its own (or with `?.`): Vite then inlines the whole env object,
+    // i.e. every VITE_* variable, into the client bundle.
+    return import.meta.env.VITE_DATABASE_URL;
+  } catch {
+    return undefined; // plain Node (scripts, react-router.config.js): import.meta.env is undefined
+  }
+}
+
 export function databaseUrl() {
-  const fromVite = import.meta.env?.VITE_DATABASE_URL;
-  const url = fromVite ?? (typeof process !== "undefined" ? process.env.VITE_DATABASE_URL : undefined);
+  const url =
+    viteDatabaseUrl() ?? (typeof process !== "undefined" ? process.env.VITE_DATABASE_URL : undefined);
   if (!url) throw new Error("VITE_DATABASE_URL is not set");
   return url.endsWith("/") ? url : `${url}/`;
 }
